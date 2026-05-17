@@ -100,7 +100,7 @@ common:
     url: https://www.mparticle.com/developers/
   - type: Pricing
     url: https://www.mparticle.com/pricing/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.mparticle.com/get-demo/
 maintainers:
   - FN: Kin Lane
