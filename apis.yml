@@ -92,6 +92,10 @@ apis:
       - type: Documentation
         url: https://docs.mparticle.com/developers/apis/platform/overview/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/mparticle
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/mparticle-inc-
   - type: Website
     url: https://www.mparticle.com/
   - type: Documentation
