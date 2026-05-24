@@ -106,6 +106,8 @@ common:
     url: https://www.mparticle.com/pricing/
   - type: SignUp
     url: https://www.mparticle.com/get-demo/
+  - type: LLMsTxt
+    url: https://docs.mparticle.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
