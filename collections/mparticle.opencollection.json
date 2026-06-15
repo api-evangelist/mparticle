@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "mParticle Events API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upload a single event batch",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://s2s.mparticle.com/v2/events",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Upload a single event batch for one user."
+    },
+    {
+      "info": {
+        "name": "Upload up to 100 event batches",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://s2s.mparticle.com/v2/bulkevents",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Upload up to 100 event batches in one request."
+    },
+    {
+      "info": {
+        "name": "Upload historical event batches",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://s2s.mparticle.com/v2/bulkevents/historical",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Upload historical data older than 30 days."
+    }
+  ],
+  "bundled": true
+}
