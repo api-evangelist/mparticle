@@ -9,7 +9,7 @@ description: >-
   APIs that let teams ingest events, resolve identity, manage configurations,
   and orchestrate audiences using HTTP Basic and bearer token authentication.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Customer Data Platform
   - CDP
