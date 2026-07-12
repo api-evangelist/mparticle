@@ -92,6 +92,14 @@ apis:
       - type: Documentation
         url: https://docs.mparticle.com/developers/apis/platform/overview/
 common:
+  - type: TrustCenter
+    url: security/mparticle-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/mparticle-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/mparticle-domain-security.yml
+  - type: Authentication
+    url: authentication/mparticle-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/mparticle
   - type: LinkedIn
@@ -108,6 +116,8 @@ common:
     url: https://www.mparticle.com/get-demo/
   - type: LlmsText
     url: https://docs.mparticle.com/llms.txt
+  - url: https://www.mparticle.com/blog/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
