@@ -92,6 +92,8 @@ apis:
       - type: Documentation
         url: https://docs.mparticle.com/developers/apis/platform/overview/
 common:
+  - type: AgenticAccess
+    url: agentic-access/mparticle-agentic-access.yml
   - type: TrustCenter
     url: security/mparticle-trust-center.yml
   - type: VulnerabilityDisclosure
