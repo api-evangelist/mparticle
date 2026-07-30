@@ -9,7 +9,19 @@ description: >-
   APIs that let teams ingest events, resolve identity, manage configurations,
   and orchestrate audiences using HTTP Basic and bearer token authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mparticle.png
 tags:
   - Customer Data Platform
   - CDP
@@ -23,74 +35,91 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: mparticle:events-api
-    name: mParticle Events API
-    description: >-
-      Server-to-server REST API for sending event batches, bulk uploads, and
-      historical data into mParticle from backend systems. Authenticates with
-      HTTP Basic auth using a server-side API key and secret pair.
-    humanURL: https://docs.mparticle.com/developers/apis/http/
-    baseURL: https://s2s.mparticle.com/v2
-    tags:
-      - REST
-      - Server-to-Server
-      - Events
-      - Bulk
-      - HTTP Basic
-    properties:
-      - type: Documentation
-        url: https://docs.mparticle.com/developers/apis/http/
-      - type: JSON Reference
-        url: https://docs.mparticle.com/developers/apis/json-reference/
-  - aid: mparticle:idsync-api
-    name: mParticle IDSync API
-    description: >-
-      Identity resolution REST API used to match, link, and modify user
-      identities across devices and channels in mParticle, returning a stable
-      mParticle ID (MPID) for downstream use.
-    humanURL: https://docs.mparticle.com/developers/apis/idsync/
-    baseURL: https://identity.mparticle.com/v1
-    tags:
-      - REST
-      - Identity
-      - IDSync
-      - MPID
-    properties:
-      - type: Documentation
-        url: https://docs.mparticle.com/developers/apis/idsync/
-  - aid: mparticle:profile-api
-    name: mParticle Profile API
-    description: >-
-      REST API for retrieving unified user profiles, identities, attributes,
-      and audience memberships at scale to personalize downstream applications.
-    humanURL: https://docs.mparticle.com/developers/apis/profile-api/
-    baseURL: https://api.mparticle.com/userprofile/v1
-    tags:
-      - REST
-      - Profiles
-      - Attributes
-      - Audiences
-    properties:
-      - type: Documentation
-        url: https://docs.mparticle.com/developers/apis/profile-api/
-  - aid: mparticle:platform-api
-    name: mParticle Platform API
-    description: >-
-      Management REST API used to programmatically configure mParticle inputs,
-      outputs, filters, audiences, data plans, and workspace settings as part
-      of a fully versioned CDP-as-code workflow.
-    humanURL: https://docs.mparticle.com/developers/apis/platform/overview/
-    baseURL: https://api.mparticle.com/platform/v2
-    tags:
-      - REST
-      - Management
-      - Inputs
-      - Outputs
-      - Data Plans
-      - Bearer Token
-    properties:
-      - type: Documentation
-        url: https://docs.mparticle.com/developers/apis/platform/overview/
+- aid: mparticle:events-api
+  name: mParticle Events API
+  description: >-
+    Server-to-server REST API for sending event batches, bulk uploads, and historical data into mParticle
+    from backend systems. Authenticates with HTTP Basic auth using a server-side API key and secret pair.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - REST
+  - Server-to-Server
+  - Events
+  - Bulk
+  - HTTP Basic
+  properties:
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+- aid: mparticle:idsync-api
+  name: mParticle IDSync API
+  description: >-
+    Identity resolution REST API used to match, link, and modify user identities across devices and channels
+    in mParticle, returning a stable mParticle ID (MPID) for downstream use.
+  humanURL: https://docs.mparticle.com/developers/apis/idsync/
+  baseURL: https://identity.mparticle.com/v1
+  tags:
+  - REST
+  - Identity
+  - IDSync
+  - MPID
+  properties:
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+- aid: mparticle:profile-api
+  name: mParticle Profile API
+  description: >-
+    REST API for retrieving unified user profiles, identities, attributes, and audience memberships at
+    scale to personalize downstream applications.
+  humanURL: https://docs.mparticle.com/developers/apis/profile-api/
+  baseURL: https://api.mparticle.com/userprofile/v1
+  tags:
+  - REST
+  - Profiles
+  - Attributes
+  - Audiences
+  properties:
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/profile-api/
+- aid: mparticle:platform-api
+  name: mParticle Platform API
+  description: >-
+    Management REST API used to programmatically configure mParticle inputs, outputs, filters, audiences,
+    data plans, and workspace settings as part of a fully versioned CDP-as-code workflow.
+  humanURL: https://docs.mparticle.com/developers/apis/platform/overview/
+  baseURL: https://api.mparticle.com/platform/v2
+  tags:
+  - REST
+  - Management
+  - Inputs
+  - Outputs
+  - Data Plans
+  - Bearer Token
+  properties:
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/platform/overview/
+- aid: mparticle:mparticle-bulkevents-api
+  name: mParticle Bulkevents API
+  description: The Bulkevents API from mParticle — 2 operation(s) for bulkevents.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Bulkevents
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-bulkevents-api-openapi.yml
+- aid: mparticle:mparticle-events-api
+  name: mParticle Events API
+  description: The Events API from mParticle — 1 operation(s) for events.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-events-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/mparticle-agentic-access.yml
