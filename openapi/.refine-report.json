@@ -1,0 +1,16 @@
+{
+  "provider": "mparticle",
+  "sources": [
+    "mparticle-bulkevents-api-openapi.yml",
+    "mparticle-events-api-openapi.yml"
+  ],
+  "outputs": [
+    "mparticle-bulkevents-api-openapi.yml",
+    "mparticle-events-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

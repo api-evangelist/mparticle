@@ -1,0 +1,136 @@
+openapi: 3.1.0
+info:
+  title: mParticle Events API
+  description: |
+    Server-to-server REST API for sending event batches, bulk uploads, and historical
+    data into mParticle from backend systems. Authenticates with HTTP Basic auth
+    using a server-side API key and secret pair.
+  version: "2.0"
+  contact:
+    name: mParticle
+    url: https://www.mparticle.com/
+  license:
+    name: Proprietary
+    url: https://www.mparticle.com/legal/terms-of-service/
+servers:
+  - url: https://s2s.mparticle.com/v2
+    description: US1 (default)
+  - url: https://s2s.us1.mparticle.com/v2
+    description: US1
+  - url: https://s2s.us2.mparticle.com/v2
+    description: US2
+  - url: https://s2s.eu1.mparticle.com/v2
+    description: EU1
+  - url: https://s2s.au1.mparticle.com/v2
+    description: AU1
+security:
+  - basicAuth: []
+paths:
+  /events:
+    post:
+      operationId: uploadEvent
+      summary: Upload a single event batch
+      description: Upload a single event batch for one user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventBatch'
+      responses:
+        '202':
+          description: Accepted - request processed successfully
+        '400':
+          description: Bad Request - malformed JSON or missing required fields
+        '401':
+          description: Unauthorized - missing authentication header
+        '403':
+          description: Forbidden - invalid authentication credentials
+        '429':
+          description: Too Many Requests - rate limit exceeded
+        '503':
+          description: Service Unavailable - retry with exponential backoff
+  /bulkevents:
+    post:
+      operationId: uploadBulkEvents
+      summary: Upload up to 100 event batches
+      description: Upload up to 100 event batches in one request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/EventBatch'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Too Many Requests
+        '503':
+          description: Service Unavailable
+  /bulkevents/historical:
+    post:
+      operationId: uploadHistoricalBulkEvents
+      summary: Upload historical event batches
+      description: Upload historical data older than 30 days.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/EventBatch'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '429':
+          description: Too Many Requests
+        '503':
+          description: Service Unavailable
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Auth using API key as username and secret as password.
+  schemas:
+    EventBatch:
+      type: object
+      description: An mParticle event batch payload.
+      properties:
+        environment:
+          type: string
+          enum:
+            - development
+            - production
+        events:
+          type: array
+          items:
+            type: object
+        user_attributes:
+          type: object
+          additionalProperties: true
+        user_identities:
+          type: object
+          additionalProperties: true
+        device_info:
+          type: object
+        application_info:
+          type: object
+        schema_version:
+          type: integer
