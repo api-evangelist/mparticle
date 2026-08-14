@@ -5,22 +5,25 @@ description: >-
   unify, and activate customer data across mobile, web, OTT, and server
   sources, then forward it in real time to hundreds of analytics, marketing,
   and warehouse destinations. The mParticle developer platform exposes server
-  Events, IDSync, Profile, Warehouse Sync, Calculated Attributes, and Platform
-  APIs that let teams ingest events, resolve identity, manage configurations,
-  and orchestrate audiences using HTTP Basic and bearer token authentication.
+  Events, IDSync, Profile, Warehouse Sync, Calculated Attributes, Data Planning
+  and Platform APIs that let teams ingest events, resolve identity, manage
+  configurations, and orchestrate audiences using HTTP Basic, an HMAC request
+  digest, and OAuth 2.0 client-credentials bearer tokens. mParticle was acquired
+  by Rokt.
 type: Index
 accessModel:
   pricing: unknown
-  onboarding: self-serve
+  onboarding: request
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Contact sales
+  confidence: high
   source:
+  - plans
   - authentication
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-08-13'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mparticle.png
 tags:
   - Customer Data Platform
@@ -30,16 +33,19 @@ tags:
   - Audience
   - Data Pipeline
   - Marketing Data
+  - Event Streaming
+  - Data Governance
 url: https://raw.githubusercontent.com/api-evangelist/mparticle/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: mparticle:events-api
   name: mParticle Events API
   description: >-
-    Server-to-server REST API for sending event batches, bulk uploads, and historical data into mParticle
-    from backend systems. Authenticates with HTTP Basic auth using a server-side API key and secret pair.
+    Server-to-server REST API for sending event batches and bulk uploads into mParticle from
+    backend systems. Authenticates with HTTP Basic auth using a server-side API key and secret
+    pair. Accepts up to 100 batches per bulk request, 128 KB per batch and 256 KB per request.
   humanURL: https://docs.mparticle.com/developers/apis/http/
   baseURL: https://s2s.mparticle.com/v2
   tags:
@@ -49,6 +55,12 @@ apis:
   - Bulk
   - HTTP Basic
   properties:
+  - type: OpenAPI
+    url: openapi/mparticle-events-openapi-original.yml
+  - type: Overlay
+    url: overlays/mparticle-events-overlay.yaml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
   - type: Documentation
     url: https://docs.mparticle.com/developers/apis/http/
   - type: JSON Reference
@@ -57,7 +69,8 @@ apis:
   name: mParticle IDSync API
   description: >-
     Identity resolution REST API used to match, link, and modify user identities across devices and channels
-    in mParticle, returning a stable mParticle ID (MPID) for downstream use.
+    in mParticle, returning a stable mParticle ID (MPID) for downstream use. Accepts HTTP Basic or an
+    HMAC-SHA256 request digest over the x-mp-key, Date and x-mp-signature headers.
   humanURL: https://docs.mparticle.com/developers/apis/idsync/
   baseURL: https://identity.mparticle.com/v1
   tags:
@@ -66,6 +79,10 @@ apis:
   - IDSync
   - MPID
   properties:
+  - type: OpenAPI
+    url: openapi/mparticle-identity-swagger-original.yml
+  - type: Overlay
+    url: overlays/mparticle-identity-overlay.yaml
   - type: Documentation
     url: https://docs.mparticle.com/developers/apis/idsync/
 - aid: mparticle:profile-api
@@ -87,7 +104,8 @@ apis:
   name: mParticle Platform API
   description: >-
     Management REST API used to programmatically configure mParticle inputs, outputs, filters, audiences,
-    data plans, and workspace settings as part of a fully versioned CDP-as-code workflow.
+    data plans, and workspace settings as part of a fully versioned CDP-as-code workflow. Authenticates
+    with an OAuth 2.0 client-credentials bearer token from sso.auth.mparticle.com.
   humanURL: https://docs.mparticle.com/developers/apis/platform/overview/
   baseURL: https://api.mparticle.com/platform/v2
   tags:
@@ -100,26 +118,50 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.mparticle.com/developers/apis/platform/overview/
-- aid: mparticle:mparticle-bulkevents-api
-  name: mParticle Bulkevents API
-  description: The Bulkevents API from mParticle — 2 operation(s) for bulkevents.
-  humanURL: https://docs.mparticle.com/developers/apis/http/
-  baseURL: https://s2s.mparticle.com/v2
+- aid: mparticle:data-planning-api
+  name: mParticle Data Planning API
+  description: >-
+    REST API for managing data plans and data plan versions in a workspace, and for validating an
+    event batch against a plan without ingesting it. Each plan version is a set of data points,
+    where a data point is a match rule plus a JSON Schema validator. OAuth 2.0 client-credentials
+    bearer auth.
+  humanURL: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  baseURL: https://api.mparticle.com/platform/v2
   tags:
-  - Bulkevents
+  - REST
+  - Data Governance
+  - Data Plans
+  - JSON Schema
+  - Validation
+  - Bearer Token
   properties:
   - type: OpenAPI
-    url: openapi/mparticle-bulkevents-api-openapi.yml
-- aid: mparticle:mparticle-events-api
-  name: mParticle Events API
-  description: The Events API from mParticle — 1 operation(s) for events.
-  humanURL: https://docs.mparticle.com/developers/apis/http/
-  baseURL: https://s2s.mparticle.com/v2
+    url: openapi/mparticle-dataplanning-openapi-original.yml
+  - type: Overlay
+    url: overlays/mparticle-dataplanning-overlay.yaml
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:warehouse-sync-api
+  name: mParticle Warehouse Sync API
+  description: >-
+    REST API for building reverse-ETL pipelines that pull data out of a customer data warehouse
+    (connections, data models, field transformations and pipelines) and load it into mParticle
+    profiles and audiences. OAuth 2.0 client-credentials bearer auth.
+  humanURL: https://docs.mparticle.com/developers/apis/warehouse-sync-api/overview/
+  baseURL: https://api.mparticle.com/platform/v2
   tags:
-  - Events
+  - REST
+  - Warehouse
+  - Reverse ETL
+  - Pipelines
+  - Bearer Token
   properties:
-  - type: OpenAPI
-    url: openapi/mparticle-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/warehouse-sync-api/overview/
+  - type: APIReference
+    url: https://docs.mparticle.com/developers/apis/warehouse-sync-api/reference/
 common:
   - type: AgenticAccess
     url: agentic-access/mparticle-agentic-access.yml
@@ -127,10 +169,54 @@ common:
     url: security/mparticle-trust-center.yml
   - type: VulnerabilityDisclosure
     url: security/mparticle-vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.rokt.com/vulnerability-disclosure/
+  - type: Compliance
+    url: https://trust.mparticle.com/
   - type: DomainSecurity
     url: security/mparticle-domain-security.yml
   - type: Authentication
     url: authentication/mparticle-authentication.yml
+  - type: Conformance
+    url: conformance/mparticle-conformance.yml
+  - type: Conventions
+    url: conventions/mparticle-conventions.yml
+  - type: ErrorCatalog
+    url: errors/mparticle-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/mparticle-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/mparticle-changelog.yml
+  - type: RateLimits
+    url: rate-limits/mparticle-rate-limits.yml
+  - type: Plans
+    url: plans/mparticle-plans-pricing.yml
+  - type: Sandbox
+    url: sandbox/mparticle-sandbox.yml
+  - type: DataModel
+    url: data-model/mparticle-data-model.yml
+  - type: Packages
+    url: packages/mparticle-packages.yml
+  - type: SDKs
+    url: packages/mparticle-packages.yml
+  - type: CLI
+    url: cli/mparticle-cli.yml
+  - type: Components
+    url: components/mparticle-components.yml
+  - type: Webhooks
+    url: asyncapi/mparticle-webhooks.yml
+  - type: MCPServer
+    url: mcp/mparticle-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: WellKnown
+    url: well-known/mparticle-well-known.yml
+  - type: SecurityTxt
+    url: well-known/mparticle-security.txt
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: LLMsTxt
+    url: llms/mparticle-llms.txt
   - type: GitHubOrganization
     url: https://github.com/mparticle
   - type: LinkedIn
@@ -140,15 +226,30 @@ common:
   - type: Documentation
     url: https://docs.mparticle.com/
   - type: DeveloperPortal
-    url: https://www.mparticle.com/developers/
+    url: https://docs.mparticle.com/developers/
+  - type: APIReference
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: GettingStarted
+    url: https://docs.mparticle.com/guides/getting-started/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
   - type: Pricing
     url: https://www.mparticle.com/pricing/
-  - type: Signup
-    url: https://www.mparticle.com/get-demo/
-  - type: LlmsText
-    url: https://docs.mparticle.com/llms.txt
+  - type: SignUp
+    url: https://www.mparticle.com/get-a-demo/
+  - type: Login
+    url: https://app.mparticle.com/login
+  - type: TermsOfService
+    url: https://www.mparticle.com/legal/platform-terms-of-service/
+  - type: PrivacyPolicy
+    url: https://www.mparticle.com/privacypolicy/
   - url: https://www.mparticle.com/blog/
     type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 35
+  pass: local-v1
