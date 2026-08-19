@@ -1,0 +1,371 @@
+{
+  "item": [
+    {
+      "id": "93106e25-9150-40e3-97fc-d478a0625e1e",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b10cbb8c-8c79-4ce8-bacb-fea460322266",
+          "name": "Upload a single event batch",
+          "request": {
+            "name": "Upload a single event batch",
+            "description": {
+              "content": "Upload a single event batch for one user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2877.422765522321\n  },\n  \"user_identities\": {\n    \"key_0\": 7026.310509634675,\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c0631af-4965-43da-bc67-abf95594340a",
+              "name": "Accepted - request processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22c14316-a14c-438c-ab0d-45fb4be1aad5",
+              "name": "Bad Request - malformed JSON or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c58de28c-bda3-451e-826d-bfa0b836a088",
+              "name": "Unauthorized - missing authentication header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01735e63-83dd-4c13-99ff-c39d27c8902f",
+              "name": "Forbidden - invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "057e760d-459d-4184-bde9-7bcf77feab36",
+              "name": "Too Many Requests - rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4bff6c05-27dc-4ae4-8cf9-6792d91ba888",
+              "name": "Service Unavailable - retry with exponential backoff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environment\": \"<string>\",\n  \"events\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"user_attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 7495.419964212548\n  },\n  \"user_identities\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"device_info\": \"<object>\",\n  \"application_info\": \"<object>\",\n  \"schema_version\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://s2s.mparticle.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d727372d-b115-4057-87fe-0bc27b673e05",
+    "name": "mParticle Bulkevents Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST API for sending event batches, bulk uploads, and historical\ndata into mParticle from backend systems. Authenticates with HTTP Basic auth\nusing a server-side API key and secret pair.\n\n\nContact Support:\n Name: mParticle",
+      "type": "text/plain"
+    }
+  }
+}

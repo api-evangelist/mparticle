@@ -1,0 +1,126 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml baseURL host, every OpenAPI servers[] host, the docs host and the OAuth issuer host
+note: >-
+  docs.mparticle.com is a Gatsby single-page app whose catch-all answers HTTP 200 with the same
+  173,582-byte HTML shell for EVERY /.well-known/* path. Those 200s are recorded below as
+  soft-404s and are NOT counted as documents. Two real documents were found: an RFC 9116
+  security.txt on the marketing host and an OIDC discovery document (plus JWKS) on mParticle's
+  Auth0 tenant, which is the issuer for every OAuth-protected management API.
+hosts:
+  - host: https://www.mparticle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain; charset=utf-8
+        bytes: 324
+        file: mparticle-security.txt
+        real: true
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://sso.auth.mparticle.com
+    role: OAuth 2.0 / OIDC issuer for the Platform, Data Planning and Warehouse Sync APIs
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=utf-8
+        bytes: 2625
+        file: mparticle-openid-configuration.json
+        real: true
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json; charset=utf-8
+        bytes: 2625
+        real: true
+        note: Returns the same document as /.well-known/openid-configuration (Auth0 behavior).
+      - path: /.well-known/jwks.json
+        status: 200
+        content_type: application/json; charset=utf-8
+        bytes: 3080
+        file: mparticle-jwks.json
+        real: true
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://docs.mparticle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        real: false
+        note: SPA catch-all - 173582 bytes of text/html. Soft-404, not a document.
+      - path: /.well-known/openid-configuration
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell.
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell.
+      - path: /.well-known/api-catalog
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell.
+      - path: /.well-known/agent-card.json
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell - NOT an A2A agent card. No a2a/ artifact written.
+      - path: /.well-known/agent.json
+        status: 200
+        real: false
+        note: SPA catch-all HTML shell - NOT an A2A agent card.
+  - host: https://api.mparticle.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: https://s2s.mparticle.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+  - host: https://identity.mparticle.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+summary:
+  real_documents: 4
+  security_txt: true
+  openid_configuration: true
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false

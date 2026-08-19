@@ -1,0 +1,123 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/mparticle-events-openapi-original.yml, openapi/mparticle-dataplanning-openapi-original.yml,
+  openapi/mparticle-identity-swagger-original.yml, plus
+  https://docs.mparticle.com/developers/apis/idsync/ and
+  https://docs.mparticle.com/developers/apis/platform/overview/
+format: vendor-envelope
+rfc9457: false
+note: >-
+  mParticle does not use RFC 9457 application/problem+json. Every mParticle API returns a plain
+  application/json envelope with an errors[] array; there is no type URI, no title, and no
+  instance. The Platform API wraps the same array in the standard data/dataType envelope. There
+  is no published registry of error codes - the only code observed in the specs is BAD_REQUEST,
+  carried as an example. Data Planning adds a richer validation error object.
+envelopes:
+  - name: ApiErrorResponse
+    used_by:
+      - mParticle Events API
+      - mParticle IDSync API
+    shape:
+      errors:
+        - code: string
+          message: string
+    source: openapi/mparticle-events-openapi-original.yml#/components/schemas/ApiErrorResponse
+  - name: PlatformErrorResponse
+    used_by:
+      - mParticle Platform API
+    shape:
+      data: []
+      dataType: string
+      errors:
+        - code: string
+          message: string
+    source: https://docs.mparticle.com/developers/apis/platform/overview/
+  - name: SchemaErrorList
+    used_by:
+      - mParticle Data Planning API
+    shape:
+      errors:
+        - message: string
+          match_key: string
+          error_type: string
+          value: string
+          schema_pointer: string
+          event_pointer: string
+          keyword: string
+    required: [message, match_key, error_type]
+    source: openapi/mparticle-dataplanning-openapi-original.yml#/components/schemas/SchemaErrorList
+    note: >-
+      error_type draws from the ValidationErrorType enum - unknown, unplanned, missing_required,
+      invalid_value.
+problems:
+  - status: 400
+    title: Bad Request
+    detail: Malformed JSON, or a required event field is missing or empty.
+    example_code: BAD_REQUEST
+    envelope: ApiErrorResponse
+    remediation: Fix the payload; do not retry unchanged.
+    source_operation:
+      - openapi/mparticle-events-openapi-original.yml#uploadEvents
+      - openapi/mparticle-events-openapi-original.yml#bulkUploadEvents
+      - openapi/mparticle-identity-swagger-original.yml#POST /identify
+      - openapi/mparticle-dataplanning-openapi-original.yml#create-plan
+  - status: 401
+    title: Unauthorized
+    detail: Authentication credentials missing or invalid.
+    envelope: ApiErrorResponse
+    remediation: >-
+      Events/IDSync - check the Basic key:secret pair or the x-mp-key / x-mp-signature / Date
+      digest headers. Platform/Data Planning/Warehouse Sync - the bearer JWT is missing or
+      expired; re-request a token from https://sso.auth.mparticle.com/oauth/token.
+    source_operation:
+      - openapi/mparticle-events-openapi-original.yml#uploadEvents
+      - openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+      - openapi/mparticle-identity-swagger-original.yml#POST /identify
+  - status: 403
+    title: Forbidden
+    detail: API key and secret are present and well-formed but are not valid for this workspace.
+    envelope: ApiErrorResponse
+    remediation: Confirm the credential belongs to the target workspace/input.
+    source_operation:
+      - openapi/mparticle-events-openapi-original.yml#uploadEvents
+      - openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+  - status: 404
+    title: Not Found
+    detail: The requested data plan or plan version does not exist.
+    envelope: ErrorList
+    source_operation:
+      - openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+      - openapi/mparticle-dataplanning-openapi-original.yml#delete-plan
+      - openapi/mparticle-dataplanning-openapi-original.yml#update-plan-version
+  - status: 422
+    title: Unprocessable Entity
+    detail: Platform API rejects a semantically invalid configuration payload.
+    envelope: PlatformErrorResponse
+    source_operation: https://docs.mparticle.com/developers/apis/platform/overview/
+  - status: 429
+    title: Too Many Requests
+    detail: A rate limit was exceeded.
+    envelope: ApiErrorResponse
+    headers:
+      - Retry-After
+      - X-mp-rate-limit-exceeded
+    remediation: >-
+      Read X-mp-rate-limit-exceeded to learn WHICH limit was hit (org, account, app, feed,
+      workspace, system, acceleration), honor Retry-After where present, and retry with
+      exponential backoff. See rate-limits/mparticle-rate-limits.yml.
+    source_operation:
+      - openapi/mparticle-events-openapi-original.yml#uploadEvents
+      - openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+      - openapi/mparticle-identity-swagger-original.yml#POST /identify
+  - status: 503
+    title: Service Unavailable
+    detail: The Events API is temporarily unavailable.
+    remediation: Retry the message after an exponential back off; do not drop the batch.
+    source_operation:
+      - openapi/mparticle-events-openapi-original.yml#uploadEvents
+      - openapi/mparticle-events-openapi-original.yml#bulkUploadEvents
+  - status: 504
+    title: Gateway Timeout
+    detail: A Platform API filter update carrying more than 500 data points may time out.
+    source_operation: https://docs.mparticle.com/guides/default-service-limits/

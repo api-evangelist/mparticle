@@ -1,0 +1,92 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.mparticle.com/developers/client-sdks/web/changelog/web-sdk-changelog/
+api_changelog:
+  published: false
+  note: >-
+    mParticle publishes NO changelog or release notes for its HTTP APIs. /release-notes/,
+    /changelog/ and /developers/changelog/ on docs.mparticle.com all return the Gatsby SPA
+    catch-all shell (soft-404). What mParticle does publish is a dated, per-release changelog for
+    each client SDK, mirrored from the GitHub release notes. Those are captured below because
+    they are the only dated release signal on the developer surface.
+scheme: semver
+changelogs:
+  - name: Web SDK
+    url: https://docs.mparticle.com/developers/client-sdks/web/changelog/web-sdk-changelog/
+    package: "@mparticle/web-sdk"
+    current: 2.78.0
+    current_published: '2026-08-12'
+    current_source: registry.npmjs.org
+  - name: Apple SDK
+    url: https://docs.mparticle.com/developers/client-sdks/ios/changelog/apple-sdk-changelog/
+    package: mParticle-Apple-SDK
+    current: 9.3.4
+    current_published: '2026-08-07'
+    current_source: trunk.cocoapods.org
+  - name: Android SDK
+    url: https://docs.mparticle.com/developers/client-sdks/android/changelog/android-sdk-changelog/
+    package: com.mparticle:android-core
+    current: 5.70.2
+    current_published: '2025-06-25'
+    current_source: search.maven.org
+entries:
+  - version: 2.76.0
+    date: '2026-08-05'
+    component: Web SDK
+    type: addition
+    breaking: false
+    highlight: Add TotalTimeOnSite measurement.
+  - version: 2.75.1
+    date: '2026-08-04'
+    component: Web SDK
+    type: deprecation
+    breaking: false
+    highlight: Report deprecated method usage as WARNING.
+  - version: 2.75.0
+    date: '2026-07-31'
+    component: Web SDK
+    type: addition
+    breaking: false
+    highlight: Forward active time-on-site to Rokt selectPlacements.
+  - version: 2.74.0
+    date: '2026-07-29'
+    component: Web SDK
+    type: addition
+    breaking: false
+    highlight: Auto-log page view on init behind the AutoLogPageView feature flag.
+  - version: 2.73.1
+    date: '2026-07-29'
+    component: Web SDK
+    type: fix
+    breaking: false
+    highlight: Drain the ready queue before processing to stop re-entrant re-execution.
+  - version: 2.73.0
+    date: '2026-07-27'
+    component: Web SDK
+    type: fix
+    breaking: false
+    highlight: Stop processPreloadedItem mutating the shared ready-queue item.
+  - version: 2.72.0
+    date: '2026-07-06'
+    component: Web SDK
+    type: addition
+    breaking: false
+    highlight: Auto-calculate commerce event total amount from products.
+  - version: 2.71.2
+    date: '2026-07-01'
+    component: Web SDK
+    type: fix
+    breaking: false
+    highlight: Prevent storage quota errors during event logging.
+  - version: 2.71.1
+    date: '2026-06-24'
+    component: Web SDK
+    type: fix
+    breaking: false
+    highlight: Normalize the Rokt noDeviceId launcher option.
+  - version: 2.71.0
+    date: '2026-06-23'
+    component: Web SDK
+    type: addition
+    breaking: false
+    highlight: Capture page_url in events.

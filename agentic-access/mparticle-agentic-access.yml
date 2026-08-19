@@ -1,20 +1,34 @@
-generated: '2026-07-15'
+generated: '2026-08-13'
 method: generated
-source: openapi/mparticle-openapi.yml
+source: openapi/mparticle-dataplanning-openapi-original.yml, openapi/mparticle-events-openapi-original.yml,
+  openapi/mparticle-identity-swagger-original.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 3
+  operations: 16
   by_action_class:
-    acting: 3
+    connected: 3
+    acting: 13
   by_consequence:
-    write: 3
+    read: 3
+    write: 11
+    physical: 2
   human_in_the_loop_required: 0
 operations:
-- path: /events
+- path: /
+  method: get
+  operationId: get-plans
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /
   method: post
-  operationId: uploadEvent
+  operationId: create-plan
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -22,6 +36,140 @@ operations:
     audience: null
     token:
       max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{plan_id}
+  method: get
+  operationId: get-plan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{plan_id}
+  method: delete
+  operationId: delete-plan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{plan_id}
+  method: patch
+  operationId: update-plan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{plan_id}/versions/{plan_version}
+  method: get
+  operationId: get-plan-version
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{plan_id}/versions/{plan_version}
+  method: patch
+  operationId: update-plan-version
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{plan_id}/versions/{plan_version}
+  method: delete
+  operationId: delete-plan-version
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{plan_id}/versions
+  method: post
+  operationId: create-plan-version
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /validate
+  method: post
+  operationId: validate-plan-document
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /events
+  method: post
+  operationId: uploadEvents
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -30,7 +178,24 @@ operations:
     audit: required
 - path: /bulkevents
   method: post
-  operationId: uploadBulkEvents
+  operationId: bulkUploadEvents
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /identify
+  method: post
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -44,9 +209,38 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /bulkevents/historical
+- path: /login
   method: post
-  operationId: uploadHistoricalBulkEvents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /logout
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{mpid}/modify
+  method: post
   x-agentic-access:
     action-class: acting
     consequence: write

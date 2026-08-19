@@ -1,0 +1,54 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the mParticle IDSync (Identity) API
+  version: 1.0.0
+extends: openapi/mparticle-identity-swagger-original.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Enhancements derived from https://docs.mparticle.com/developers/apis/idsync/ and the repo
+  artifacts. The harvested Swagger 2.0 document is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/mparticle/
+      x-apievangelist-harvested-from: https://docs.mparticle.com/downloads/identity-swagger.yaml
+      x-apievangelist-harvested-on: '2026-08-13'
+      x-spec-version-note: >-
+        Published as Swagger 2.0. mParticle has not migrated this contract to OpenAPI 3.x, unlike
+        its Events and Data Planning specs.
+      x-api-evangelist-artifacts:
+        authentication: authentication/mparticle-authentication.yml
+        conventions: conventions/mparticle-conventions.yml
+        errors: errors/mparticle-problem-types.yml
+        rate_limits: rate-limits/mparticle-rate-limits.yml
+        data_model: data-model/mparticle-data-model.yml
+  - target: $.info
+    update:
+      x-hmac-signing:
+        recommended: true
+        headers: [x-mp-key, Date, x-mp-signature]
+        algorithm: HMAC-SHA256 (hex)
+        string_to_sign: "<HTTP METHOD>\\n<ISO 8601 date>\\n<request path><request body>"
+        key: the workspace API secret
+        source: https://docs.mparticle.com/developers/apis/idsync/
+  - target: $.info
+    update:
+      x-undocumented-in-spec:
+        - path: /search
+          method: post
+          summary: Determine whether a user identity already exists.
+          note: >-
+            Documented at https://docs.mparticle.com/developers/apis/idsync/ but absent from the
+            published Swagger document. Recorded here as a spec gap, NOT added to the contract.
+  - target: $.paths['/identify'].post
+    update:
+      x-rate-limit:
+        status_on_exhaustion: 429
+        retry_guidance: exponential backoff
+        source: https://docs.mparticle.com/developers/apis/idsync/
+  - target: $.paths['/{mpid}/modify'].post
+    update:
+      x-consequence: >-
+        Mutates the identity graph for an existing MPID. Treat as a high-consequence write - see
+        agentic-access/mparticle-agentic-access.yml.

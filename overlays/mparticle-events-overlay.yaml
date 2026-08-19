@@ -1,0 +1,77 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the mParticle Events API
+  version: 1.0.0
+extends: openapi/mparticle-events-openapi-original.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Enhancements derived from mParticle's own documentation
+  (https://docs.mparticle.com/developers/apis/http/,
+  https://docs.mparticle.com/guides/default-service-limits/) and the repo artifacts. The harvested
+  spec is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/mparticle/
+      x-apievangelist-harvested-from: https://docs.mparticle.com/downloads/mparticle.events.oas.yaml
+      x-apievangelist-harvested-on: '2026-08-13'
+      x-api-evangelist-artifacts:
+        authentication: authentication/mparticle-authentication.yml
+        conventions: conventions/mparticle-conventions.yml
+        errors: errors/mparticle-problem-types.yml
+        rate_limits: rate-limits/mparticle-rate-limits.yml
+        sandbox: sandbox/mparticle-sandbox.yml
+        data_model: data-model/mparticle-data-model.yml
+        webhooks: asyncapi/mparticle-webhooks.yml
+  - target: $.info
+    update:
+      x-idempotency:
+        supported: false
+        note: >-
+          mParticle publishes no idempotency key. Retrying a 429 or 503 can re-ingest the batch;
+          carry your own event identifiers.
+  - target: $.servers
+    update:
+      - url: https://s2s.mparticle.com/v2
+        description: US1 (default)
+      - url: https://s2s.us1.mparticle.com/v2
+        description: US1
+      - url: https://s2s.us2.mparticle.com/v2
+        description: US2
+      - url: https://s2s.eu1.mparticle.com/v2
+        description: EU1
+      - url: https://s2s.au1.mparticle.com/v2
+        description: AU1
+  - target: $.paths['/events'].post
+    update:
+      x-rate-limit:
+        scope: per-account
+        limit: 270
+        unit: batches
+        window: 1s
+        adjustable: true
+        status_on_exhaustion: 429
+        headers_on_429: [Retry-After, X-mp-rate-limit-exceeded]
+        headers_on_2xx: [X-mp-rate-limit-percentage-used]
+        source: https://docs.mparticle.com/guides/default-service-limits/
+      x-max-batch-size: 128 KB
+      x-max-request-size: 256 KB
+  - target: $.paths['/bulkevents'].post
+    update:
+      x-rate-limit:
+        scope: per-account
+        limit: 270
+        unit: batches
+        window: 1s
+        status_on_exhaustion: 429
+        headers_on_429: [Retry-After, X-mp-rate-limit-exceeded]
+        headers_on_2xx: [X-mp-rate-limit-percentage-used]
+        source: https://docs.mparticle.com/guides/default-service-limits/
+      x-max-batches-per-request: 100
+      x-max-request-size: 256 KB
+  - target: $.components.schemas.Batch.properties.environment
+    update:
+      x-test-live-separation: >-
+        This field is the ONLY separation between test and live traffic - the same API key serves
+        both. See sandbox/mparticle-sandbox.yml.

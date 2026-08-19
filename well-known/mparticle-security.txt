@@ -1,0 +1,8 @@
+Contact: mailto:security@rokt.com
+Expires: 2024-06-02T02:00:00.000Z
+Preferred-Languages: en, nl, de
+Canonical: https://www.mparticle.com/.well-known/security.txt
+Hiring: https://www.mparticle.com/careers/
+
+# mParticle was acquired by Rokt. Report vulnerabilities here.
+Policy: https://www.rokt.com/vulnerability-disclosure/

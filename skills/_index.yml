@@ -1,0 +1,29 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Grounded in the three first-party mParticle specs in openapi/ plus the conventions/, errors/,
+  rate-limits/ and sandbox/ artifacts. Every operationId referenced was grepped from the spec.
+  mParticle publishes no AGENTS.md or skill files of its own.
+skills:
+  - file: mparticle-send-events.md
+    name: Send events to mParticle
+    api: openapi/mparticle-events-openapi-original.yml
+    operations: [uploadEvents, bulkUploadEvents]
+  - file: mparticle-resolve-identity.md
+    name: Resolve a user identity with mParticle IDSync
+    api: openapi/mparticle-identity-swagger-original.yml
+    operations: ["POST /identify", "POST /login", "POST /logout", "POST /{mpid}/modify"]
+  - file: mparticle-govern-data-plans.md
+    name: Govern mParticle data plans
+    api: openapi/mparticle-dataplanning-openapi-original.yml
+    operations:
+      - get-plans
+      - create-plan
+      - get-plan
+      - update-plan
+      - delete-plan
+      - create-plan-version
+      - get-plan-version
+      - update-plan-version
+      - delete-plan-version
+      - validate-plan-document

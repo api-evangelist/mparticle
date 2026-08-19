@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.mparticle.com/developers/apis/platform/overview/,
+  https://docs.mparticle.com/developers/client-sdks/web/changelog/web-sdk-changelog/,
+  live probe of https://status.mparticle.com (2026-08-13)
+versioning:
+  scheme: uri-path
+  current:
+    - api: mParticle Events API
+      version: v2
+    - api: mParticle IDSync API
+      version: v1
+    - api: mParticle Profile API
+      version: v1
+    - api: mParticle Platform API
+      version: v1
+    - api: mParticle Data Planning API
+      version: v2
+    - api: mParticle Warehouse Sync API
+      version: v2
+    - api: mParticle Data Subject Request API
+      version: v3 (v2 still documented)
+  policy: Breaking changes ship as a new version number in the URL path.
+  docs: https://docs.mparticle.com/developers/apis/platform/overview/
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    mParticle publishes no API deprecation policy, no sunset window and no RFC 8594
+    Deprecation/Sunset response headers. Deprecations are announced per SDK inside the individual
+    SDK changelogs (for example Web SDK v2.75.1, 2026-08-04, "report deprecated method usage as
+    WARNING") and by retiring documentation pages - the Data Subject Request API v2 page is still
+    served alongside v3 with no stated end date. NO Deprecation pointer is emitted in apis.yml.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment is published; terms are in the Platform Terms of Service.
+status_page:
+  url: null
+  published: false
+  evidence:
+    - url: https://status.mparticle.com
+      status: 200
+      redirects_to: https://manage.statuspage.io/login
+      finding: >-
+        The status.mparticle.com hostname still resolves but the Statuspage instance behind it no
+        longer exists - every request, including /api/v2/status.json, follows a redirect to the
+        Statuspage operator login. There is no reachable mParticle status page. NO StatusPage
+        pointer is emitted in apis.yml.
+  checked: '2026-08-13'
+deprecated_operations: []
+changelog:
+  api_changelog_published: false
+  sdk_changelogs:
+    - https://docs.mparticle.com/developers/client-sdks/web/changelog/web-sdk-changelog/
+    - https://docs.mparticle.com/developers/client-sdks/ios/changelog/apple-sdk-changelog/
+    - https://docs.mparticle.com/developers/client-sdks/android/changelog/android-sdk-changelog/
+  detail: changelog/mparticle-changelog.yml
+ownership:
+  note: >-
+    mParticle was acquired by Rokt. The acquisition is visible in the live artifacts rather than
+    inferred - the mParticle security.txt names security@rokt.com and points its Policy at
+    https://www.rokt.com/vulnerability-disclosure/, and the Web SDK changelog carries Rokt
+    integration entries (v2.75.0, 2026-07-31, "forward active time-on-site to Rokt
+    selectPlacements"). The mparticle.com legal pages that the OpenAPI license block points at
+    (/legal/terms-of-service/) now 404; the live terms are at /legal/platform-terms-of-service/.

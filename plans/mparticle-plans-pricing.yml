@@ -1,0 +1,22 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.mparticle.com/pricing/
+probed:
+  - url: https://www.mparticle.com/pricing/
+    status: 200
+    finding: >-
+      The page returns HTTP 200 and renders, but it publishes no tiers, no prices, no included
+      volumes and no overage terms. It is a demo-request/contact-sales landing page carrying
+      "Contact sales", "Request pricing" and a lead form.
+plan_count: 0
+pricing_model: contact-sales
+currency: null
+free_tier: false
+trial: false
+plans: []
+note: >-
+  mParticle does not publish plans or prices. Pricing is quoted through sales only, which is
+  normal for an enterprise CDP but means a buyer or an agent cannot determine cost, included event
+  volume, or overage rates from any public surface. The published Default Service Limits page
+  (see rate-limits/) is the closest thing to a published entitlement, and it describes technical
+  ceilings rather than commercial tiers. Recorded as an honest zero, not an omission.

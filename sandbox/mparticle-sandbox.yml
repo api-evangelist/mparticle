@@ -1,0 +1,64 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  openapi/mparticle-events-openapi-original.yml,
+  openapi/mparticle-dataplanning-openapi-original.yml,
+  https://docs.mparticle.com/guides/getting-started/,
+  https://github.com/mParticle/mparticle-cli
+summary: >-
+  mParticle has no sandbox host and issues no test credentials. Test-versus-live separation is
+  carried INSIDE the payload by a single required enum field, and verification is done with a
+  live-tailing debug view in the UI plus a dry-run validation endpoint. There are no magic test
+  values, no test cards, no test clocks and no fixture generator - nothing to record verbatim
+  because the provider publishes nothing of that kind.
+test_live_separation:
+  mechanism: payload-field
+  field: environment
+  location: event batch root
+  required: true
+  default: production
+  values:
+    - unknown
+    - development
+    - production
+  source: openapi/mparticle-events-openapi-original.yml#/components/schemas/Batch
+  note: >-
+    Batches sent with environment=development land in the workspace development environment and
+    are visible in Live Stream; environment=production routes to configured production outputs.
+    The same API key and secret are used for both, so a mis-set field sends test traffic to live
+    destinations. There is no key prefix (no sk_test_/sk_live_ equivalent) and no separate
+    sandbox host - the guardrail is one string in the body.
+sandbox_hosts: []
+test_credentials:
+  published: false
+  note: Credentials are issued per workspace input from the mParticle UI ("Issue Keys"); no shared public test key exists.
+dry_run:
+  supported: true
+  operation: openapi/mparticle-dataplanning-openapi-original.yml#validate-plan-document
+  endpoint: POST https://api.mparticle.com/platform/v2/workspaces/{workspace_id}/plans/validate
+  description: >-
+    Validate an event batch against a data plan document WITHOUT ingesting it. Accepts a
+    {document, batch} body and returns the validation errors the batch would raise
+    (validation_error_type of unknown / unplanned / missing_required / invalid_value, with
+    schema_pointer and event_pointer). This is the closest thing mParticle publishes to a
+    dry-run mode and it is the correct pre-flight for an agent about to write events.
+  auth: OAuth 2.0 bearer (Platform credentials)
+local_validation:
+  - tool: mParticle CLI
+    command: mp planning:batches:validate --batchFile ./batch.json
+    package: "@mparticle/cli"
+    note: Validates a batch against a data plan version without any network write. See cli/mparticle-cli.yml.
+  - tool: "@mparticle/data-planning-node"
+    package: "@mparticle/data-planning-node"
+    note: Node library that runs the same JSON Schema validation locally.
+debug_tooling:
+  - name: Live Stream
+    kind: real-time ingest viewer (UI)
+    description: >-
+      Real-time view of data being ingested into the development environment; the documented way
+      to confirm a new input is wired correctly before switching to production.
+    docs: https://docs.mparticle.com/guides/getting-started/
+reference_payloads:
+  - file: json-schema/mparticle-eventsapi-sample.json
+    source: https://docs.mparticle.com/schema/mparticle.inbound.eventsapi.sample.json
+    note: mParticle's own published sample event-batch document - a real fixture, saved verbatim.

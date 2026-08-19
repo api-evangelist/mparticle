@@ -1,0 +1,149 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.mparticle.com/guides/default-service-limits/
+docs:
+  - https://docs.mparticle.com/guides/default-service-limits/
+  - https://docs.mparticle.com/developers/apis/http/
+  - https://docs.mparticle.com/developers/apis/idsync/
+note: >-
+  mParticle publishes a single consolidated "Default Service Limits" page covering every API
+  family. Several limits are documented as defaults that mParticle will raise on request, which
+  is recorded per entry. Values below are quoted from that page as read on 2026-08-13.
+response_headers:
+  on_exhaustion:
+    - name: Retry-After
+      description: >-
+        Returned by /v2/events and /v2/bulkevents with a non-negative decimal integer - the number
+        of seconds to wait before retrying.
+      source: https://docs.mparticle.com/developers/apis/http/
+    - name: X-mp-rate-limit-exceeded
+      description: >-
+        Returned on a 429 naming WHICH limit was hit. Documented values - org, account, app, feed,
+        workspace, system, acceleration.
+      source: https://docs.mparticle.com/guides/default-service-limits/
+  on_success:
+    - name: X-mp-rate-limit-percentage-used
+      description: >-
+        Returned on 2xx responses with the percentage of the applicable limit already consumed -
+        the pre-emptive backpressure signal an agent should read before it is throttled.
+      source: https://docs.mparticle.com/guides/default-service-limits/
+  status_on_exhaustion: 429
+  retry_guidance: Exponential backoff; the Events API and IDSync docs both instruct retrying 429 and 5xx with backoff.
+limits:
+  - api: mParticle Events API
+    scope: per-account
+    limit: 270
+    unit: batches
+    window: 1s
+    status: 429
+    adjustable: true
+    note: Default only; mParticle states the actual limit varies and can be raised.
+  - api: mParticle Events API
+    scope: per-request
+    limit: 256
+    unit: KB
+    window: null
+    note: Maximum request size across the Events API endpoints.
+  - api: mParticle Events API
+    scope: per-batch
+    limit: 128
+    unit: KB
+    window: null
+    note: Maximum size of a single event batch.
+  - api: mParticle Events API
+    scope: per-request
+    limit: 100
+    unit: event batches
+    window: null
+    note: Maximum batches in one POST /bulkevents request.
+  - api: mParticle Profile API
+    scope: per-account
+    limit: 15
+    unit: requests
+    window: 1s
+    status: 429
+    adjustable: true
+    note: Documented as a floor that scales with demand.
+  - api: mParticle Data Planning API
+    scope: per-account
+    limit: 3000
+    unit: requests
+    window: 1m
+  - api: mParticle Data Planning API
+    scope: per-organization
+    limit: 6000
+    unit: requests
+    window: 1m
+  - api: mParticle Data Subject Request API
+    scope: per-workspace
+    limit: 1000
+    unit: requests
+    window: 1m
+    note: GET, POST and DELETE combined.
+  - api: mParticle Data Subject Request API
+    scope: per-workspace
+    limit: 80000
+    unit: new requests
+    window: 24h
+    note: Also capped at 26,666 per rolling 8-hour window.
+  - api: mParticle Platform API
+    scope: per-request
+    limit: 500
+    unit: data points per filter update
+    window: null
+    status: 504
+    note: Larger filter updates may time out with a 504.
+  - api: mParticle Warehouse Sync API
+    scope: per-account
+    limit: 5
+    unit: active pipelines
+    window: null
+  - api: mParticle Warehouse Sync API
+    scope: per-pipeline
+    limit: 5000000
+    unit: records
+    window: 1h interval
+  - api: mParticle Warehouse Sync API
+    scope: per-pipeline
+    limit: 120000000
+    unit: records
+    window: 1d interval
+    note: Also the historical-load and on-demand-request ceiling.
+  - api: mParticle Warehouse Sync API
+    scope: per-pipeline
+    limit: 200000000
+    unit: records
+    window: weekly or monthly interval
+platform_quotas:
+  - resource: unique event names per workspace
+    limit: 1000
+    note: New unique event names over the limit are dropped.
+  - resource: average events per user
+    limit: 150
+    window: 24h
+    adjustable: true
+  - resource: average events per user
+    limit: 175
+    window: 30d
+    adjustable: true
+  - resource: user attributes per batch
+    limit: 100
+  - resource: event attribute value length
+    limit: 4096
+    unit: characters
+  - resource: workspaces per account
+    limit: 50
+  - resource: users per account
+    limit: 200
+  - resource: data plan size
+    limit: 10
+    unit: MB
+  - resource: data plan points
+    limit: 1000
+  - resource: event batch archival retention
+    limit: 24
+    unit: months
+  - resource: real-time audience storage per user
+    limit: 30
+    unit: MB
+limit_count: 14

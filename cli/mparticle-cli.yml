@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/mParticle/mparticle-cli
+docs: https://docs.mparticle.com/developers/apis/dataplanning-api/
+name: mParticle CLI
+binary: mp
+package: "@mparticle/cli"
+registry: npm
+version: 1.0.8
+published: '2022-03-31'
+framework: oclif
+maintenance:
+  last_release: '2022-03-31'
+  last_repo_push: '2023-07-12'
+  status: dormant
+  note: >-
+    First-party and still installable, but no release in over four years while the Data Planning
+    API it drives is at v2. Treat as unmaintained tooling rather than a supported surface.
+install:
+  - npm install -g "@mparticle/cli"
+scope: >-
+  The CLI covers the Data Planning surface only. It does not wrap the Events API, IDSync, the
+  Profile API, Warehouse Sync, or general Platform API configuration.
+commands:
+  - group: planning:data-plans
+    description: Manage data plans in a workspace.
+    commands:
+      - name: planning:data-plans:create
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#create-plan
+      - name: planning:data-plans:fetch
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#get-plan
+      - name: planning:data-plans:fetch-all
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+      - name: planning:data-plans:update
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#update-plan
+      - name: planning:data-plans:delete
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#delete-plan
+  - group: planning:data-plan-versions
+    description: Manage individual versions of a data plan.
+    commands:
+      - name: planning:data-plan-versions:create
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#create-plan-version
+      - name: planning:data-plan-versions:fetch
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#get-plan-version
+      - name: planning:data-plan-versions:update
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#update-plan-version
+      - name: planning:data-plan-versions:delete
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#delete-plan-version
+  - group: planning:validate
+    description: Validate event batches and events locally or against the API.
+    commands:
+      - name: planning:batches:validate
+        description: Validates event batches. Accepts --batch (stringified JSON) or --batchFile.
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#validate-plan-document
+      - name: planning:events:validate
+        description: Validates individual events against a data plan version.
+        maps_to: openapi/mparticle-dataplanning-openapi-original.yml#validate-plan-document
+  - group: built-in
+    commands:
+      - name: help
+      - name: autocomplete
+key_flags:
+  - "--clientId / --clientSecret: Platform API OAuth client credentials"
+  - "--workspaceId: target workspace"
+  - "--dataPlanId / --versionNumber: target plan and version"
+  - "--batch / --batchFile: event batch input"
+  - "-o, --outFile: write results to a file instead of stdout"
+key_flows:
+  - Validate an event batch against a data plan version before shipping instrumentation.
+  - Create and version a data plan as code, from CI, alongside the app that emits the events.

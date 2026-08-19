@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: >-
+  Derived from the three first-party mParticle specs in openapi/. Searched for a published
+  mParticle MCP server on 2026-08-13 and found none: no /mcp endpoint on any mParticle host, no
+  MCP repository in https://github.com/mParticle (85 repos enumerated via the GitHub API), no
+  @mparticle MCP package on npm, and no MCP page in the docs sitemap (830 URLs). The only
+  AI-agent surface mParticle documents is the in-product "Audience Agent"
+  (https://docs.mparticle.com/guides/segmentation/audiences/audience-agent/overview/), which is a
+  UI feature, not an MCP server.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+server:
+  name: mparticle
+  transport: null
+  url: null
+tools:
+  - name: upload_events
+    description: Upload a single event batch for one user to the mParticle Events API.
+    source_operation: openapi/mparticle-events-openapi-original.yml#uploadEvents
+  - name: bulk_upload_events
+    description: Upload up to 100 event batches in a single request.
+    source_operation: openapi/mparticle-events-openapi-original.yml#bulkUploadEvents
+  - name: list_data_plans
+    description: List the data plans in a workspace.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#get-plans
+  - name: create_data_plan
+    description: Create a new data plan in a workspace.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#create-plan
+  - name: get_data_plan
+    description: Retrieve a single data plan by id.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#get-plan
+  - name: update_data_plan
+    description: Update a data plan's display name or description.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#update-plan
+  - name: delete_data_plan
+    description: Delete a data plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#delete-plan
+  - name: create_data_plan_version
+    description: Create a new version of a data plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#create-plan-version
+  - name: get_data_plan_version
+    description: Retrieve a specific version of a data plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#get-plan-version
+  - name: update_data_plan_version
+    description: Update a specific version of a data plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#update-plan-version
+  - name: delete_data_plan_version
+    description: Delete a specific version of a data plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#delete-plan-version
+  - name: validate_data_plan_document
+    description: Validate a data plan document or an event batch against a plan.
+    source_operation: openapi/mparticle-dataplanning-openapi-original.yml#validate-plan-document
+  - name: identify_user
+    description: Create or request an mParticle identity (MPID) for a set of user identities.
+    source_operation: openapi/mparticle-identity-swagger-original.yml#POST /identify
+  - name: login_user
+    description: Transition a user to an authenticated identity state.
+    source_operation: openapi/mparticle-identity-swagger-original.yml#POST /login
+  - name: logout_user
+    description: Transition a user to an unauthenticated identity state.
+    source_operation: openapi/mparticle-identity-swagger-original.yml#POST /logout
+  - name: modify_user_identities
+    description: Add, change or remove identities on an existing mParticle profile.
+    source_operation: openapi/mparticle-identity-swagger-original.yml#POST /{mpid}/modify
+coverage:
+  rest_operations_total: 16
+  tools_derived: 16

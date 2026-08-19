@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.mparticle.com/developers/apis/http/,
+  https://docs.mparticle.com/developers/apis/idsync/,
+  https://docs.mparticle.com/developers/apis/platform/overview/,
+  https://docs.mparticle.com/developers/apis/dataplanning-api/,
+  https://docs.mparticle.com/guides/default-service-limits/, and the three specs in openapi/
+authentication:
+  style: split-by-api-family
+  ingestion:
+    scheme: HTTP Basic (workspace API key as username, API secret as password)
+    alternative: >-
+      IDSync also accepts an HMAC-SHA256 request digest over x-mp-key / Date / x-mp-signature,
+      which mParticle recommends over Basic.
+  management:
+    scheme: OAuth 2.0 client credentials -> bearer JWT
+    token_url: https://sso.auth.mparticle.com/oauth/token
+    audience: https://api.mparticle.com
+    token_lifetime: ~8 hours
+    revocable: false
+  detail: authentication/mparticle-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    mParticle publishes no idempotency key, no request-deduplication contract and no
+    Idempotency-Key parameter in any of its three specs. The Events API is documented as
+    at-least-once with client retry on 429/503, which means a retried batch can be ingested
+    twice; mParticle's guidance is to make event payloads carry their own identifiers rather
+    than to rely on server-side deduplication. NO Idempotency pointer is emitted in apis.yml -
+    the provider does not offer this contract.
+pagination:
+  supported: false
+  note: >-
+    No mParticle API in the published specs paginates. The Data Planning list operation
+    (get-plans) returns the full plan collection for a workspace with no limit/offset/cursor
+    parameters; Profile API returns one profile per request. Bulk export is handled by the
+    Warehouse Sync API pipelines rather than by paged reads.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: true
+  mechanism: >-
+    Event batches carry free-form user_attributes and custom_attributes objects, plus a
+    device_info / application_info / source_request_id context block. The data plan
+    (data_plan_context) can constrain which attributes are allowed.
+request_tracing:
+  header: null
+  note: >-
+    mParticle documents no request-id response header. Event batches may carry a client-supplied
+    source_request_id field inside the payload, which is the only correlation handle exposed.
+versioning:
+  scheme: uri-path
+  current:
+    events: v2 (https://s2s.mparticle.com/v2)
+    idsync: v1 (https://identity.mparticle.com/v1)
+    platform: v1 (https://api.mparticle.com/v1/)
+    platform_v2_services: v2 (https://api.mparticle.com/platform/v2/ - Data Planning, Warehouse Sync)
+    dsr: v2 and v3 both documented
+  policy: >-
+    "Breaking changes are published as new version numbers in the URL path"
+    (https://docs.mparticle.com/developers/apis/platform/overview/). No sunset window, no
+    Deprecation or Sunset response headers, and no dated deprecation policy are published.
+error_envelope:
+  shape: '{"errors": [{"code": "...", "message": "..."}]}'
+  rfc9457: false
+  detail: errors/mparticle-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  headers_on_429:
+    - Retry-After
+    - X-mp-rate-limit-exceeded
+  headers_on_2xx:
+    - X-mp-rate-limit-percentage-used
+  detail: rate-limits/mparticle-rate-limits.yml
+  note: >-
+    X-mp-rate-limit-percentage-used on successful responses is unusually good practice - it lets
+    a client throttle itself before it is throttled. It is the single strongest runtime signal
+    mParticle publishes.
+payload_constraints:
+  max_batch_size: 128 KB
+  max_request_size: 256 KB
+  max_batches_per_bulk_request: 100
+  content_type: application/json
+environments:
+  field: environment
+  values: [development, production]
+  note: >-
+    mParticle separates test from live inside the payload rather than with separate keys or
+    hosts. See sandbox/mparticle-sandbox.yml.
+cross_links:
+  authentication: authentication/mparticle-authentication.yml
+  errors: errors/mparticle-problem-types.yml
+  lifecycle: lifecycle/mparticle-lifecycle.yml
+  rate_limits: rate-limits/mparticle-rate-limits.yml
+  sandbox: sandbox/mparticle-sandbox.yml

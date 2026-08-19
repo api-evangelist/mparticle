@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.mparticle.com/developers/client-sdks/web/,
+  https://github.com/mParticle/aquarium, https://www.npmjs.com/package/@mparticle/web-sdk
+note: >-
+  mParticle's client-side surface is a data-collection snippet rather than a set of prebuilt UI
+  widgets. Two families exist - the loader-based Web SDK families that a site embeds, and one
+  published React component library.
+families:
+  - name: Web SDK (self-hosted / bundled)
+    kind: javascript-library
+    package: "@mparticle/web-sdk"
+    registry: npm
+    version: 2.78.0
+    published: '2026-08-12'
+    docs: https://docs.mparticle.com/developers/client-sdks/web/
+    description: >-
+      Core browser collection library. Initialized with mParticle.init(apiKey, config); exposes
+      logEvent, logPageView, logCommerceEvent, Identity.login/logout/modify and the consent state
+      API. Backs the Events and IDSync APIs from the browser.
+  - name: Web SDK (CDN snippet)
+    kind: cdn-loader
+    loader: https://jssdkcdns.mparticle.com/js/v2/{apiKey}/mparticle.js
+    registry: cdn
+    version: null
+    published: null
+    unpinned: true
+    note: >-
+      The documented snippet loads a per-workspace bundle from mParticle's CDN with no version in
+      the URL - it floats to whatever mParticle has deployed. A consumer cannot tell which SDK
+      build they are running from the URL alone, which is the finding. Probed with a placeholder
+      key on 2026-08-13 and it returned 404 application/problem+json, i.e. the CDN edge validates
+      the key path segment.
+  - name: Web SDK (jsDelivr mirror)
+    kind: cdn-mirror
+    loader: https://cdn.jsdelivr.net/npm/@mparticle/web-sdk/dist/mparticle.min.js
+    registry: cdn
+    version: 2.78.0
+    published: '2026-08-12'
+    pinnable: true
+    note: >-
+      Unofficial-but-working npm mirror; pin with @mparticle/web-sdk@2.78.0 in the path to get a
+      deterministic build. Version read from data.jsdelivr.com/v1/packages/npm/@mparticle/web-sdk.
+  - name: Web Media SDK
+    kind: javascript-library
+    package: "@mparticle/web-media-sdk"
+    registry: npm
+    version: 1.5.0
+    published: '2026-01-21'
+    description: Media session / playback event instrumentation layered on the core Web SDK.
+  - name: Aquarium
+    kind: react-component-library
+    package: "@mparticle/aquarium"
+    registry: npm
+    version: 2.3.0
+    published: '2026-04-23'
+    repo: https://github.com/mParticle/aquarium
+    storybook: https://mparticle.github.io/aquarium/
+    peer_requirements:
+      react: ">=19.0.0"
+      antd: "6"
+    description: >-
+      "Aquarium - Rokt UI Library". A published design system of React components built on Ant
+      Design, used to build applications on top of mParticle/Rokt. It is a UI toolkit, not an
+      API-bound embeddable widget - it does not render mParticle data on its own.
+    install: npm install @mparticle/aquarium antd@6 dayjs@1
+hosted_surfaces: []
+embedded_dashboards: []

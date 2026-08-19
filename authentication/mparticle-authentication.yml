@@ -1,13 +1,94 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/mparticle-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: openapi/mparticle-dataplanning-openapi-original.yml, openapi/mparticle-identity-swagger-original.yml, openapi/mparticle-events-openapi-original.yml
+docs:
+  - https://docs.mparticle.com/developers/apis/http/
+  - https://docs.mparticle.com/developers/apis/idsync/
+  - https://docs.mparticle.com/developers/apis/platform/overview/
+  - https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - https://docs.mparticle.com/developers/apis/warehouse-sync-api/overview/
 summary:
   types:
-  - http
+    - apiKey
+    - http
+    - oauth2
+  api_key_in:
+    - header
+  oauth2_flows:
+    - clientCredentials
+  note: >-
+    mParticle splits authentication by API family. The data-ingestion APIs (Events, IDSync)
+    use workspace API key/secret credentials over HTTP Basic or an HMAC-SHA256 request digest.
+    The management APIs (Platform, Data Planning, Warehouse Sync) use OAuth 2.0 client
+    credentials against an Auth0-hosted tenant and a bearer JWT.
 schemes:
-- name: basicAuth
-  type: http
-  scheme: basic
-  description: HTTP Basic Auth using API key as username and secret as password.
-  sources:
-  - openapi/mparticle-openapi.yml
+  - name: basic
+    type: http
+    scheme: basic
+    description: >-
+      HTTP Basic using the workspace server-side API key as the username and the API secret as
+      the password. Used by the Events API (s2s.mparticle.com) and accepted by IDSync.
+    applies_to:
+      - mParticle Events API
+      - mParticle IDSync API
+    sources:
+      - openapi/mparticle-events-openapi-original.yml
+      - openapi/mparticle-identity-swagger-original.yml
+      - https://docs.mparticle.com/developers/apis/http/
+  - name: BasicSecurity
+    type: http
+    scheme: basic
+    description: Basic authorization with your workspace API key and secret.
+    sources:
+      - openapi/mparticle-identity-swagger-original.yml
+  - name: ApiKeyDigest
+    type: apiKey
+    in: header
+    parameter: x-mp-key
+    description: >-
+      HMAC request digest (mParticle's recommended IDSync scheme). Requires three headers -
+      x-mp-key (the API key), Date (ISO 8601), and x-mp-signature (hex HMAC-SHA256 of
+      "<HTTP METHOD>\n<ISO 8601 date>\n<request path><request body>" keyed with the API secret).
+    headers:
+      - x-mp-key
+      - x-mp-signature
+      - Date
+    sources:
+      - openapi/mparticle-identity-swagger-original.yml
+      - https://docs.mparticle.com/developers/apis/idsync/
+  - name: bearerAuth
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+    description: >-
+      Bearer JWT obtained from the OAuth 2.0 client-credentials token endpoint below. Used by
+      the Platform API, Data Planning API and Warehouse Sync API.
+    sources:
+      - openapi/mparticle-dataplanning-openapi-original.yml
+      - https://docs.mparticle.com/developers/apis/platform/overview/
+  - name: oauth2ClientCredentials
+    type: oauth2
+    flow: clientCredentials
+    token_url: https://sso.auth.mparticle.com/oauth/token
+    audience: https://api.mparticle.com
+    grant_type: client_credentials
+    token_lifetime: ~8 hours
+    revocable: false
+    scopes: []
+    description: >-
+      OAuth 2.0 client-credentials grant. POST client_id, client_secret, audience
+      (https://api.mparticle.com) and grant_type=client_credentials to the token endpoint; the
+      returned access_token is sent as "Authorization: Bearer {access_token}". mParticle
+      documents no scope parameter - authorization is carried by the credential and the
+      AccountId/workspace_id in the request path or query string. Tokens cannot be revoked and
+      expire in roughly 8 hours, so the docs require token caching.
+    sources:
+      - https://docs.mparticle.com/developers/apis/platform/overview/
+      - https://docs.mparticle.com/developers/apis/dataplanning-api/
+      - well-known/mparticle-openid-configuration.json
+discovery:
+  openid_configuration: well-known/mparticle-openid-configuration.json
+  issuer: https://sso.auth.mparticle.com/
+  jwks_uri: https://sso.auth.mparticle.com/.well-known/jwks.json
+  probed: '2026-08-13'
+  http_status: 200

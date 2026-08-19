@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "mParticle Bulkevents Events API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a single event batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://s2s.mparticle.com/v2/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a single event batch for one user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.mparticle.com/integrations/webhook/event/
+spec_type: null
+asyncapi_published: false
+note: >-
+  mParticle publishes NO AsyncAPI document. It does operate a real outbound event surface - the
+  Webhook output integration, which HTTP POSTs mParticle event batches to a customer-supplied
+  URL as they are received. That surface is captured here as a webhook catalog. The message body
+  is the same mParticle JSON event-batch schema harvested to
+  json-schema/mparticle-eventsapi-schema.json, so the payload contract IS machine-readable even
+  though the channel binding is not.
+webhooks:
+  direction: outbound
+  name: mParticle Webhook output integration
+  docs: https://docs.mparticle.com/integrations/webhook/event/
+  transport: HTTPS POST
+  content_type: application/json
+  payload_schema: json-schema/mparticle-eventsapi-schema.json
+  payload_note: >-
+    Events are delivered in the mParticle JSON event-batch format - the same document shape the
+    Events API accepts on the way in.
+  subscription_model: >-
+    Configured per workspace in the mParticle UI as an event output/destination, not by API. There
+    is no subscription-management endpoint, so an agent cannot register or list webhooks
+    programmatically.
+  configuration:
+    - name: POST URL
+      type: string
+      description: Target endpoint; http or https scheme.
+    - name: Authorization Header
+      type: string
+      description: >-
+        Free-form value placed in the Authorization request header, e.g.
+        "Basic <base64 of username:password>" or any custom scheme. Optional.
+    - name: Include MP DeviceId
+      type: boolean
+    - name: Send as Batch
+      type: boolean
+      description: Group events into roughly 10-minute batches per device instead of one POST per event.
+    - name: Include Metadata
+      type: boolean
+      description: Forward application, device and source information.
+    - name: Include Location Information
+      type: boolean
+  delivery:
+    mode:
+      - individual (one POST per event, forwarded as received)
+      - batched (~10-minute intervals per device)
+      - session-based (deprecated for Apple SDK 8.0+)
+    retry: Automatic retry on timeouts and non-fatal errors using an exponential backoff pattern.
+    ordering: not guaranteed
+    signature: none
+    note: >-
+      mParticle does not sign webhook deliveries. The only authentication available to the
+      receiver is the static Authorization header value the customer configures, so receivers
+      cannot verify origin cryptographically.
+  event_types:
+    source: openapi/mparticle-events-openapi-original.yml#/components/schemas/EventType
+    note: >-
+      Each type below is individually toggleable in the integration settings. Enum values are
+      taken verbatim from mParticle's own Events API schema.
+    values:
+      - session_start
+      - session_end
+      - screen_view
+      - custom_event
+      - crash_report
+      - opt_out
+      - first_run
+      - pre_attribution
+      - push_registration
+      - application_state_transition
+      - push_message
+      - network_performance
+      - breadcrumb
+      - profile
+      - push_reaction
+      - commerce_event
+      - user_attribute_change
+      - user_identity_change
+      - uninstall

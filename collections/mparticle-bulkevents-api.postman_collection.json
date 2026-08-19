@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "e097f84b-7512-467b-8ddd-e91c5d88219b",
+      "name": "Bulkevents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a3fc925-c50c-413e-885e-a9ac6449678f",
+          "name": "Upload up to 100 event batches",
+          "request": {
+            "name": "Upload up to 100 event batches",
+            "description": {
+              "content": "Upload up to 100 event batches in one request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulkevents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"environment\": \"<string>\",\n    \"events\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": \"string\",\n      \"key_2\": false\n    },\n    \"user_identities\": {\n      \"key_0\": 8899.61014868678\n    },\n    \"device_info\": \"<object>\",\n    \"application_info\": \"<object>\",\n    \"schema_version\": \"<integer>\"\n  },\n  {\n    \"environment\": \"<string>\",\n    \"events\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"user_attributes\": {\n      \"key_0\": 7752.580375246568,\n      \"key_1\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": false,\n      \"key_1\": false,\n      \"key_2\": 3428\n    },\n    \"device_info\": \"<object>\",\n    \"application_info\": \"<object>\",\n    \"schema_version\": \"<integer>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bc2ddca-2d11-4199-9c4e-11acddf9146b",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b3415d9-3d93-4f6e-ae13-bb9579eade21",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b28a8565-f59d-4e20-9382-9bea191ef242",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba9bf967-f7e1-4204-b0ad-b77f2f1d64bf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d546d9a9-1951-4c94-a4c2-62d6a8adca01",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "781a285c-d970-4c82-ae7f-4f46134359ac",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "781e06e9-c917-4ad6-b8e0-9fa496fc7c57",
+          "name": "Upload historical event batches",
+          "request": {
+            "name": "Upload historical event batches",
+            "description": {
+              "content": "Upload historical data older than 30 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulkevents",
+                "historical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"environment\": \"<string>\",\n    \"events\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": \"string\",\n      \"key_2\": false\n    },\n    \"user_identities\": {\n      \"key_0\": 8899.61014868678\n    },\n    \"device_info\": \"<object>\",\n    \"application_info\": \"<object>\",\n    \"schema_version\": \"<integer>\"\n  },\n  {\n    \"environment\": \"<string>\",\n    \"events\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"user_attributes\": {\n      \"key_0\": 7752.580375246568,\n      \"key_1\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": false,\n      \"key_1\": false,\n      \"key_2\": 3428\n    },\n    \"device_info\": \"<object>\",\n    \"application_info\": \"<object>\",\n    \"schema_version\": \"<integer>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d6460f2-0461-4fce-8d57-2ea6883c006e",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a696ede3-4c81-46d5-b58c-5c5f4d51116d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8d0174b-8e75-49c5-a49e-871c5f44c78a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b52c567-64ca-4a91-b46b-28f0c628073b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "119c54ee-5f60-44bf-9a05-8daa4d73c537",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f875704-c7a1-4c14-9962-c20c435d7584",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulkevents",
+                    "historical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"environment\": \"production\",\n    \"user_attributes\": {\n      \"key_0\": 2446\n    },\n    \"user_identities\": {\n      \"key_0\": 9549.73684846659\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 9729\n  },\n  {\n    \"environment\": \"development\",\n    \"user_attributes\": {\n      \"key_0\": true,\n      \"key_1\": 7899,\n      \"key_2\": \"string\"\n    },\n    \"user_identities\": {\n      \"key_0\": true\n    },\n    \"device_info\": {},\n    \"application_info\": {},\n    \"schema_version\": 2387\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://s2s.mparticle.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4bce08eb-33d3-49fe-bf24-6572ba574d18",
+    "name": "mParticle Events Bulkevents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST API for sending event batches, bulk uploads, and historical\ndata into mParticle from backend systems. Authenticates with HTTP Basic auth\nusing a server-side API key and secret pair.\n\n\nContact Support:\n Name: mParticle",
+      "type": "text/plain"
+    }
+  }
+}

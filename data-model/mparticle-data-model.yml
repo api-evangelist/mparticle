@@ -1,0 +1,178 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/mparticle-events-openapi-original.yml,
+  openapi/mparticle-dataplanning-openapi-original.yml,
+  openapi/mparticle-identity-swagger-original.yml,
+  json-schema/mparticle-eventsapi-schema.json
+note: >-
+  Derived from $ref graphs and id-reference fields in mParticle's own published specs. mParticle's
+  core is not a CRUD resource tree - it is an event pipeline, so the primary graph is
+  Batch -> Event, hung off a single identity spine (MPID) and constrained by a Data Plan.
+identifiers:
+  - name: mpid
+    type: integer (64-bit)
+    description: >-
+      The mParticle ID. The canonical cross-device, cross-channel identifier for a person,
+      returned by every IDSync operation and stamped on every resolved batch. Every other
+      identity type resolves to exactly one MPID.
+    issued_by: mParticle IDSync API
+  - name: data_plan_id
+    type: string
+    description: Workspace-scoped data plan identifier.
+  - name: workspace_id
+    type: integer
+    description: Path/server variable on every Platform v2 URL.
+  - name: apiKey
+    type: string
+    description: Per-input workspace credential; determines which input a batch is attributed to.
+entities:
+  - name: Batch
+    domain: events
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/Batch
+    description: >-
+      The unit of ingestion. One batch belongs to one user in one environment, and carries the
+      events plus the context needed to resolve and attribute them.
+    key_fields: [environment, events, user_attributes, user_identities, mpid, schema_version]
+  - name: BulkBatch
+    domain: events
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/BulkBatch
+    description: An array of up to 100 Batch documents posted to /bulkevents.
+  - name: BaseEvent
+    domain: events
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/BaseEvent
+    description: >-
+      Polymorphic event, discriminated by event_type. 19 concrete subtypes exist
+      (CustomEvent, CommerceEvent, ScreenViewEvent, SessionStartEvent, CrashReportEvent,
+      UserIdentityChangeEvent, ...), each with its own *EventData payload.
+  - name: CommerceEvent
+    domain: events
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/CommerceEvent
+  - name: Product
+    domain: commerce
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/Product
+  - name: ShoppingCart
+    domain: commerce
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/ShoppingCart
+  - name: UserIdentity
+    domain: identity
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/UserIdentity
+  - name: IdentityType
+    domain: identity
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/IdentityType
+    description: The enum of identity kinds (email, customerid, device identifiers, ...) that resolve to an MPID.
+  - name: ConsentState
+    domain: privacy
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/ConsentState
+    description: Container for GDPRConsentState and CCPA consent purposes carried on the batch.
+  - name: DeviceInformation
+    domain: context
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/DeviceInformation
+  - name: ApplicationInformation
+    domain: context
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/ApplicationInformation
+  - name: DataPlanContext
+    domain: governance
+    schema: openapi/mparticle-events-openapi-original.yml#/components/schemas/DataPlanContext
+    description: The plan id and version a batch declares it should be validated against.
+  - name: DataPlan
+    domain: governance
+    schema: openapi/mparticle-dataplanning-openapi-original.yml#/components/schemas/DataPlan
+    key_fields: [data_plan_id, data_plan_name, data_plan_versions, created_on, created_by]
+  - name: DataPlanVersion
+    domain: governance
+    schema: openapi/mparticle-dataplanning-openapi-original.yml#/components/schemas/DataPlanVersion
+    key_fields: [version, data_plan_id, version_document, activated_environment, quarantine_feed_id]
+  - name: VersionDocument
+    domain: governance
+    schema: openapi/mparticle-dataplanning-openapi-original.yml#/components/schemas/VersionDocument
+    description: The plan itself - a set of data points plus transformations.
+  - name: DataPoint
+    domain: governance
+    schema: openapi/mparticle-dataplanning-openapi-original.yml#/components/schemas/DataPoint
+    description: One match/validator pair - the JSON Schema rule for one event or attribute shape.
+  - name: IdentifyRequest
+    domain: identity
+    schema: openapi/mparticle-identity-swagger-original.yml#/definitions/IdentifyRequest
+  - name: ModifyRequest
+    domain: identity
+    schema: openapi/mparticle-identity-swagger-original.yml#/definitions/ModifyRequest
+relationships:
+  - from: Batch
+    to: BaseEvent
+    type: has_many
+    via: events
+  - from: BulkBatch
+    to: Batch
+    type: has_many
+    via: (array root)
+  - from: Batch
+    to: UserIdentity
+    type: has_many
+    via: user_identities
+  - from: Batch
+    to: ConsentState
+    type: has_one
+    via: consent_state
+  - from: Batch
+    to: DeviceInformation
+    type: has_one
+    via: device_info
+  - from: Batch
+    to: ApplicationInformation
+    type: has_one
+    via: application_info
+  - from: Batch
+    to: DataPlanContext
+    type: has_one
+    via: context.data_plan
+  - from: Batch
+    to: mpid
+    type: belongs_to
+    via: mpid
+  - from: CommerceEvent
+    to: Product
+    type: has_many
+    via: data.product_action.products
+  - from: CommerceEvent
+    to: ShoppingCart
+    type: has_one
+    via: data.shopping_cart
+  - from: UserIdentity
+    to: IdentityType
+    type: has_one
+    via: identity_type
+  - from: DataPlan
+    to: DataPlanVersion
+    type: has_many
+    via: data_plan_versions
+  - from: DataPlanVersion
+    to: DataPlan
+    type: belongs_to
+    via: data_plan_id
+  - from: DataPlanVersion
+    to: VersionDocument
+    type: has_one
+    via: version_document
+  - from: VersionDocument
+    to: DataPoint
+    type: has_many
+    via: data_points
+  - from: DataPlanContext
+    to: DataPlan
+    type: belongs_to
+    via: plan_id
+  - from: IdentifySuccessResponse
+    to: mpid
+    type: has_one
+    via: mpid
+  - from: ModifyRequest
+    to: mpid
+    type: belongs_to
+    via: (path parameter)
+cross_spec_reuse:
+  note: >-
+    The Data Planning spec embeds a namespaced copy of the Events schemas
+    (Mparticle_S2s_Events_Oas_Batch, _BaseEvent, _ConsentState, ...) so a plan can be validated
+    against the exact ingest contract. That is a genuine shared data model across two published
+    specs, not two independent definitions.

@@ -1,0 +1,60 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the mParticle Data Planning API
+  version: 1.0.0
+extends: openapi/mparticle-dataplanning-openapi-original.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Enhancements derived from https://docs.mparticle.com/developers/apis/dataplanning-api/,
+  https://docs.mparticle.com/guides/default-service-limits/ and the repo artifacts.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/mparticle/
+      x-apievangelist-harvested-from: https://docs.mparticle.com/downloads/mparticle.dataplanning.oas.yaml
+      x-apievangelist-harvested-on: '2026-08-13'
+      x-api-evangelist-artifacts:
+        authentication: authentication/mparticle-authentication.yml
+        conventions: conventions/mparticle-conventions.yml
+        errors: errors/mparticle-problem-types.yml
+        rate_limits: rate-limits/mparticle-rate-limits.yml
+        cli: cli/mparticle-cli.yml
+        data_model: data-model/mparticle-data-model.yml
+  - target: $.info
+    update:
+      x-oauth2:
+        flow: clientCredentials
+        token_url: https://sso.auth.mparticle.com/oauth/token
+        audience: https://api.mparticle.com
+        token_lifetime: ~8 hours
+        revocable: false
+        scopes: []
+        discovery: https://sso.auth.mparticle.com/.well-known/openid-configuration
+        note: >-
+          The spec declares only a bare http/bearer scheme. The bearer is a JWT from the OAuth 2.0
+          client-credentials grant documented above; this overlay records where it comes from.
+  - target: $.info
+    update:
+      x-rate-limit:
+        source: https://docs.mparticle.com/guides/default-service-limits/
+        limits:
+          - scope: per-account
+            limit: 3000
+            unit: requests
+            window: 1m
+          - scope: per-organization
+            limit: 6000
+            unit: requests
+            window: 1m
+  - target: $.paths['/validate'].post
+    update:
+      x-dry-run: true
+      x-dry-run-note: >-
+        Validates an event batch against a data plan WITHOUT ingesting it. This is the correct
+        pre-flight for an agent about to write events. See sandbox/mparticle-sandbox.yml.
+  - target: $.paths['/'].get
+    update:
+      x-pagination:
+        supported: false
+        note: Returns the full plan collection for the workspace; no limit/offset/cursor parameters exist.
