@@ -51,6 +51,12 @@ apis:
   tags:
   - REST
   - Server-to-Server
+  - Event
+  - Bulk
+  - HTTP Basic
+  tags_raw:
+  - REST
+  - Server-to-Server
   - Events
   - Bulk
   - HTTP Basic
@@ -128,6 +134,13 @@ apis:
   humanURL: https://docs.mparticle.com/developers/apis/dataplanning-api/
   baseURL: https://api.mparticle.com/platform/v2
   tags:
+  - REST
+  - Data Governance
+  - Data Plans
+  - JSON-Schema
+  - Validation
+  - Bearer Token
+  tags_raw:
   - REST
   - Data Governance
   - Data Plans
