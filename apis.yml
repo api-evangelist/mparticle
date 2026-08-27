@@ -40,57 +40,6 @@ created: '2026-05-11'
 modified: '2026-08-13'
 specificationVersion: '0.23'
 apis:
-- aid: mparticle:events-api
-  name: mParticle Events API
-  description: >-
-    Server-to-server REST API for sending event batches and bulk uploads into mParticle from
-    backend systems. Authenticates with HTTP Basic auth using a server-side API key and secret
-    pair. Accepts up to 100 batches per bulk request, 128 KB per batch and 256 KB per request.
-  humanURL: https://docs.mparticle.com/developers/apis/http/
-  baseURL: https://s2s.mparticle.com/v2
-  tags:
-  - REST
-  - Server-to-Server
-  - Event
-  - Bulk
-  - HTTP Basic
-  tags_raw:
-  - REST
-  - Server-to-Server
-  - Events
-  - Bulk
-  - HTTP Basic
-  properties:
-  - type: OpenAPI
-    url: openapi/mparticle-events-openapi-original.yml
-  - type: Overlay
-    url: overlays/mparticle-events-overlay.yaml
-  - type: JSONSchema
-    url: json-schema/mparticle-eventsapi-schema.json
-  - type: Documentation
-    url: https://docs.mparticle.com/developers/apis/http/
-  - type: JSON Reference
-    url: https://docs.mparticle.com/developers/apis/json-reference/
-- aid: mparticle:idsync-api
-  name: mParticle IDSync API
-  description: >-
-    Identity resolution REST API used to match, link, and modify user identities across devices and channels
-    in mParticle, returning a stable mParticle ID (MPID) for downstream use. Accepts HTTP Basic or an
-    HMAC-SHA256 request digest over the x-mp-key, Date and x-mp-signature headers.
-  humanURL: https://docs.mparticle.com/developers/apis/idsync/
-  baseURL: https://identity.mparticle.com/v1
-  tags:
-  - REST
-  - Identity
-  - IDSync
-  - MPID
-  properties:
-  - type: OpenAPI
-    url: openapi/mparticle-identity-swagger-original.yml
-  - type: Overlay
-    url: overlays/mparticle-identity-overlay.yaml
-  - type: Documentation
-    url: https://docs.mparticle.com/developers/apis/idsync/
 - aid: mparticle:profile-api
   name: mParticle Profile API
   description: >-
@@ -124,44 +73,12 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.mparticle.com/developers/apis/platform/overview/
-- aid: mparticle:data-planning-api
-  name: mParticle Data Planning API
-  description: >-
-    REST API for managing data plans and data plan versions in a workspace, and for validating an
-    event batch against a plan without ingesting it. Each plan version is a set of data points,
-    where a data point is a match rule plus a JSON Schema validator. OAuth 2.0 client-credentials
-    bearer auth.
-  humanURL: https://docs.mparticle.com/developers/apis/dataplanning-api/
-  baseURL: https://api.mparticle.com/platform/v2
-  tags:
-  - REST
-  - Data Governance
-  - Data Plans
-  - JSON-Schema
-  - Validation
-  - Bearer Token
-  tags_raw:
-  - REST
-  - Data Governance
-  - Data Plans
-  - JSON Schema
-  - Validation
-  - Bearer Token
-  properties:
-  - type: OpenAPI
-    url: openapi/mparticle-dataplanning-openapi-original.yml
-  - type: Overlay
-    url: overlays/mparticle-dataplanning-overlay.yaml
-  - type: Documentation
-    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
-  - type: Postman
-    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
 - aid: mparticle:warehouse-sync-api
   name: mParticle Warehouse Sync API
   description: >-
-    REST API for building reverse-ETL pipelines that pull data out of a customer data warehouse
-    (connections, data models, field transformations and pipelines) and load it into mParticle
-    profiles and audiences. OAuth 2.0 client-credentials bearer auth.
+    REST API for building reverse-ETL pipelines that pull data out of a customer data warehouse (connections,
+    data models, field transformations and pipelines) and load it into mParticle profiles and audiences.
+    OAuth 2.0 client-credentials bearer auth.
   humanURL: https://docs.mparticle.com/developers/apis/warehouse-sync-api/overview/
   baseURL: https://api.mparticle.com/platform/v2
   tags:
@@ -175,7 +92,167 @@ apis:
     url: https://docs.mparticle.com/developers/apis/warehouse-sync-api/overview/
   - type: APIReference
     url: https://docs.mparticle.com/developers/apis/warehouse-sync-api/reference/
+- aid: mparticle:mparticle-data-plan-api
+  name: mParticle Data Plan API
+  description: Endpoints for managing Data Plans
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Data Plan
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-data-plan-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-data-plan-version-api
+  name: mParticle Data Plan Version API
+  description: Endpoints for versioning Data Plans
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Data Plan Version
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-data-plan-version-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-events-api
+  name: mParticle Events API
+  description: Send your data to the mParticle platform.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-events-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-identify-api
+  name: mParticle Identify API
+  description: The Identify API from mParticle — 1 operation(s) for identify.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Identify
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-identify-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-login-api
+  name: mParticle Login API
+  description: The Login API from mParticle — 1 operation(s) for login.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Login
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-login-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-logout-api
+  name: mParticle Logout API
+  description: The Logout API from mParticle — 1 operation(s) for logout.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Logout
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-logout-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
+- aid: mparticle:mparticle-modify-api
+  name: mParticle Modify API
+  description: The Modify API from mParticle — 1 operation(s) for modify.
+  humanURL: https://docs.mparticle.com/developers/apis/http/
+  baseURL: https://s2s.mparticle.com/v2
+  tags:
+  - Modify
+  properties:
+  - type: OpenAPI
+    url: openapi/mparticle-modify-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/mparticle-eventsapi-schema.json
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/http/
+  - type: JSON Reference
+    url: https://docs.mparticle.com/developers/apis/json-reference/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/idsync/
+  - type: Documentation
+    url: https://docs.mparticle.com/developers/apis/dataplanning-api/
+  - type: Postman
+    url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
 common:
+  - type: Overlay
+    url: overlays/mparticle-events-overlay.yaml
+  - type: Overlay
+    url: overlays/mparticle-identity-overlay.yaml
+  - type: Overlay
+    url: overlays/mparticle-dataplanning-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/mparticle-agentic-access.yml
   - type: TrustCenter
