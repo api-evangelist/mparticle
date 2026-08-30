@@ -154,6 +154,8 @@ apis:
   humanURL: https://docs.mparticle.com/developers/apis/http/
   baseURL: https://s2s.mparticle.com/v2
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -259,6 +261,11 @@ apis:
   - type: Postman
     url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
 common:
+  - type: ParentCompany
+    url: https://apis.io/providers/rokt/
+    name: Rokt
+    x-relationship: acquired
+    x-evidence: "mParticle was acquired by Rokt."
   - type: Overlay
     url: overlays/mparticle-events-overlay.yaml
   - type: Overlay
