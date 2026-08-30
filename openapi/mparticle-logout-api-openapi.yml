@@ -1,0 +1,237 @@
+openapi: 3.2.0
+info:
+  description: mParticle Identity API
+  title: mParticle Identity Logout API
+  version: '1.0'
+servers:
+- url: https://identity.mparticle.com/v1
+security:
+- BasicSecurity: []
+- ApiKeyDigest: []
+tags:
+- name: Logout
+paths:
+  /logout:
+    post:
+      description: mParticle identity endpoint - used to create and/or request an mParticle identity.
+      parameters:
+      - $ref: '#/components/parameters/AuthHeaderKey'
+      - $ref: '#/components/parameters/AuthHeaderDigest'
+      - $ref: '#/components/parameters/AuthHeaderDate'
+      - $ref: '#/components/parameters/IdentifyBodyRequest'
+      - $ref: '#/components/parameters/ReadOnly'
+      - $ref: '#/components/parameters/ReturnMatchedIds'
+      responses:
+        200:
+          $ref: '#/components/responses/IdentifySuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        429:
+          $ref: '#/components/responses/TooManyRequests'
+      tags:
+      - Logout
+components:
+  responses:
+    IdentifySuccessResponse:
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentifySuccessResponse'
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
+    Unauthorized:
+      description: Unauthorized.
+  schemas:
+    IdentityErrorResponse:
+      description: Indicates one or more errors occured during the request.
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            type: object
+          type: array
+      type: object
+    IdentityBaseRequest:
+      properties:
+        client_sdk:
+          $ref: '#/components/schemas/ClientSdk'
+        context:
+          description: Previous context string.
+          type: string
+        environment:
+          description: The environment to used to apply this change. (required)
+          enum:
+          - production
+          - development
+          type: string
+        request_id:
+          type: string
+        request_timestamp_ms:
+          type: integer
+      required:
+      - environment
+      type: object
+    ClientSdk:
+      description: Describes the client SDK originating the request.
+      properties:
+        platform:
+          $ref: '#/components/schemas/Platform'
+        sdk_vendor:
+          type: string
+        sdk_version:
+          type: string
+      type: object
+    IdentifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/IdentityBaseRequest'
+      - type: object
+        properties:
+          previous_mpid:
+            type: string
+          known_identities:
+            $ref: '#/components/schemas/Identities'
+    Platform:
+      enum:
+      - ios
+      - android
+      - web
+      - tvos
+      - roku
+      - alexa
+      - smart_tv
+      - fire
+      - xbox
+      - other
+      type: string
+    IdentifySuccessResponse:
+      properties:
+        context:
+          description: Base 64 string to store for the subsequent request.
+          type: string
+        matched_identities:
+          $ref: '#/components/schemas/Identities'
+        mpid:
+          description: The mParticle ID associated with this Identity.
+          type: string
+        is_ephemeral:
+          description: If true, the ID and its storage can be deleted by the client upon change of ID.
+          readOnly: true
+          type: boolean
+      type: object
+    Identities:
+      additionalProperties: false
+      properties:
+        ios_idfa:
+          type: string
+          description: iOS advertising ID
+        android_aaid:
+          type: string
+          description: Android advertising ID
+        amp_id:
+          type: string
+          description: Accelerated Mobile Pages (AMP) ID
+        android_uuid:
+          type: string
+          description: Legacy Android ID
+        ios_idfv:
+          type: string
+          description: iOS vendor ID
+        push_token:
+          type: string
+          description: iOS APNS push token, Android FCM Instance ID, or Fire push token
+        roku_publisher_id:
+          type: string
+          description: Roku publisher ID
+        roku_aid:
+          type: string
+          description: Roku advertising ID
+        customerid:
+          type: string
+        email:
+          type: string
+        facebook:
+          type: string
+        facebookcustomaudienceid:
+          type: string
+        google:
+          type: string
+        microsoft:
+          type: string
+        other:
+          type: string
+        twitter:
+          type: string
+        yahoo:
+          type: string
+        device_application_stamp:
+          type: string
+      type: object
+  parameters:
+    ReturnMatchedIds:
+      name: return_matches
+      in: query
+      description: Return the IDs used to perform the look-up in the response body.
+      required: false
+      schema:
+        type: boolean
+    ReadOnly:
+      name: read_only
+      in: query
+      description: Perform this action as a read-only operation for debugging purposes.
+      required: false
+      schema:
+        type: boolean
+    AuthHeaderDigest:
+      name: x-mp-signature
+      in: header
+      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
+      schema:
+        type: string
+    AuthHeaderDate:
+      description: Current Date. REQUIRED for digest auth.
+      in: header
+      name: Date
+      schema:
+        type: string
+    AuthHeaderKey:
+      name: x-mp-key
+      in: header
+      description: API key for your mParticle workspace. REQUIRED for digest auth.
+      schema:
+        type: string
+    IdentifyBodyRequest:
+      description: IdentifyRequest used to create and update an Identity in the mParticle platform.
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdentifyRequest'
+  securitySchemes:
+    BasicSecurity:
+      type: http
+      scheme: basic
+      description: Basic authorization with your workspace API key and secret.
+    ApiKeyDigest:
+      type: apiKey
+      in: header
+      description: API key digest auth - requires the x-mp-key, x-mp-signature, and Date headers.
+      name: x-mp-key

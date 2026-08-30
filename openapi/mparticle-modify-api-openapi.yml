@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  description: mParticle Identity API
+  title: mParticle Identity Modify API
+  version: '1.0'
+servers:
+- url: https://identity.mparticle.com/v1
+security:
+- BasicSecurity: []
+- ApiKeyDigest: []
+tags:
+- name: Modify
+paths:
+  /{mpid}/modify:
+    parameters:
+    - $ref: '#/components/parameters/Mpid'
+    post:
+      description: mParticle modify endpoint - used to modify an existing user.
+      parameters:
+      - $ref: '#/components/parameters/AuthHeaderKey'
+      - $ref: '#/components/parameters/AuthHeaderDigest'
+      - $ref: '#/components/parameters/AuthHeaderDate'
+      - $ref: '#/components/parameters/ModifyBodyRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/ModifySuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        429:
+          $ref: '#/components/responses/TooManyRequests'
+      tags:
+      - Modify
+components:
+  schemas:
+    IdentityErrorResponse:
+      description: Indicates one or more errors occured during the request.
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            type: object
+          type: array
+      type: object
+    IdentityBaseRequest:
+      properties:
+        client_sdk:
+          $ref: '#/components/schemas/ClientSdk'
+        context:
+          description: Previous context string.
+          type: string
+        environment:
+          description: The environment to used to apply this change. (required)
+          enum:
+          - production
+          - development
+          type: string
+        request_id:
+          type: string
+        request_timestamp_ms:
+          type: integer
+      required:
+      - environment
+      type: object
+    ClientSdk:
+      description: Describes the client SDK originating the request.
+      properties:
+        platform:
+          $ref: '#/components/schemas/Platform'
+        sdk_vendor:
+          type: string
+        sdk_version:
+          type: string
+      type: object
+    IdentityChange:
+      type: object
+      required:
+      - old_value
+      - new_value
+      - identity_type
+      properties:
+        old_value:
+          type: string
+          description: The previous value that was associated with this identity type, or null if this is a new id.
+        new_value:
+          type: string
+          description: The new value to associate with this identity_type, or null to remove the value.
+        identity_type:
+          type: string
+          enum:
+          - ios_idfa
+          - android_aaid
+          - amp_id
+          - android_uuid
+          - ios_idfv
+          - push_token
+          - roku_publisher_id
+          - roku_aid
+          - customerid
+          - email
+          - facebook
+          - facebookcustomaudienceid
+          - google
+          - microsoft
+          - other
+          - twitter
+          - yahoo
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/IdentityBaseRequest'
+      - type: object
+        properties:
+          identity_changes:
+            items:
+              $ref: '#/components/schemas/IdentityChange'
+            type: array
+        required:
+        - identity_changes
+    Platform:
+      enum:
+      - ios
+      - android
+      - web
+      - tvos
+      - roku
+      - alexa
+      - smart_tv
+      - fire
+      - xbox
+      - other
+      type: string
+    ModifySuccessResponse:
+      type: object
+  responses:
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
+    Unauthorized:
+      description: Unauthorized.
+    ModifySuccessResponse:
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ModifySuccessResponse'
+  parameters:
+    AuthHeaderDigest:
+      name: x-mp-signature
+      in: header
+      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
+      schema:
+        type: string
+    AuthHeaderDate:
+      description: Current Date. REQUIRED for digest auth.
+      in: header
+      name: Date
+      schema:
+        type: string
+    ModifyBodyRequest:
+      description: ModifyRequest used to modify an existing identity.
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/components/schemas/ModifyRequest'
+    AuthHeaderKey:
+      name: x-mp-key
+      in: header
+      description: API key for your mParticle workspace. REQUIRED for digest auth.
+      schema:
+        type: string
+    Mpid:
+      name: mpid
+      in: path
+      description: mParticle User Id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BasicSecurity:
+      type: http
+      scheme: basic
+      description: Basic authorization with your workspace API key and secret.
+    ApiKeyDigest:
+      type: apiKey
+      in: header
+      description: API key digest auth - requires the x-mp-key, x-mp-signature, and Date headers.
+      name: x-mp-key
