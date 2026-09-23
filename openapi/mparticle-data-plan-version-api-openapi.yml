@@ -126,213 +126,106 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
       summary: Create a Data Plan Version
 components:
-  schemas:
-    DataPlanVersion:
-      type: object
-      properties:
-        version:
-          type: integer
-        version_description:
-          type: string
-        created_on:
-          type: string
-          format: date-time
-        created_by:
-          type: string
-        last_modified_on:
-          type: string
-          format: date-time
-        last_modified_by:
-          type: string
-        version_document:
-          $ref: '#/components/schemas/VersionDocument'
-        activated_environment:
-          $ref: '#/components/schemas/ActivatedEnvironment'
-        data_plan_id:
-          type: string
-        quarantine_feed_id:
-          type:
-          - number
-          - 'null'
-          readOnly: true
-    DataPoint:
-      type: object
-      properties:
-        description:
-          type: string
-        match:
-          $ref: '#/components/schemas/DataPointMatch'
-        validator:
-          $ref: '#/components/schemas/DataPointValidator'
-      required:
-      - match
-      - validator
-    SchemaError:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      properties:
-        match_key:
-          type: string
-        value:
-          type: string
-        schema_pointer:
-          type: string
-        event_pointer:
-          type: string
-        keyword:
-          type: string
-        error_type:
-          type: string
-      required:
-      - message
-      - match_key
-      - error_type
-    ProductAction:
-      type: string
-      title: ProductAction
-      enum:
-      - add_to_cart
-      - remove_from_cart
-      - checkout
-      - checkout_option
-      - click
-      - view_detail
-      - purchase
-      - refund
-      - add_to_wishlist
-      - remove_from_wish_list
-    DataPointMatch:
-      properties:
-        type:
-          $ref: '#/components/schemas/MatchType'
-        criteria:
-          $ref: '#/components/schemas/Criteria'
-      required:
-      - type
-      - criteria
-      title: ''
-    VersionDocument:
-      type: object
-      description: This is the actual data plan, since a data plan can have many versions.
-      properties:
-        data_points:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataPoint'
-        active_transformation_ids:
-          type: array
-          items:
-            type: number
-          readOnly: true
-        transformations:
-          $ref: '#/components/schemas/DataPlanTransformation'
-    CustomEventCriteria:
-      properties:
-        event_name:
-          type: string
-        custom_event_type:
-          type: string
-          enum:
-          - unknown
-          - navigation
-          - location
-          - search
-          - transaction
-          - user_content
-          - user_preference
-          - social
-          - other
-          - media
-      required:
-      - event_name
-      - custom_event_type
-    ErrorList:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
+  responses:
+    DataPlanVersionNotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            x-examples:
+              example-1:
+                errors:
+                - message: The specified version 10 in plan ID plan_1 was not found in workspace 1234.
+            properties:
+              errors:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      minLength: 1
+                      enum:
+                      - The specified plan ID {plan_id} in workspace {workspace_id} was not found.
+                      - The specified version {version_id} in plan ID {plan_id} was not found in workspace {workspace_id}.
+                  required:
+                  - message
+            required:
+            - errors
+          examples:
+            example-1:
+              value:
+                errors:
+                - message: The specified version 10 in plan ID plan_1 was not found in workspace 1234.
+    DataPlanVersionResponse:
+      description: Data plan version
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataPlanVersion'
+    Unauthorized:
+      description: Unauthorized
+    DeletePlanVersionBadRequest:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              errors:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      minLength: 1
+                      enum:
+                      - Unable to delete plan version - plans must contain at least one plan version.
+                      - Unable to delete plan version - this version is active in prod and cannot be deleted.
+                      - Unable to delete plan version. Plan versions with an associated quarantine feed can only be deleted through the UI.
+                  required:
+                  - message
+            required:
+            - errors
+          examples:
+            example-1:
+              value:
+                errors:
+                - message: Unable to delete plan version - plans must contain at least one plan version.
+    Forbidden:
+      description: Forbidden
+    TooManyRequests:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Seconds to wait until the next request attempt
+          schema:
+            type: integer
+    BadSchema:
+      description: Bad Schema
+      content:
+        application/json:
+          schema:
             oneOf:
-            - $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-    DataPlanTransformation:
-      title: DataPlanTransformation
-      type: object
-      properties:
-        transformation_id:
-          type: number
-        transformation_name:
-          type: string
-        error_pointer:
-          type: string
-        validation_error_types:
-          type: array
-          items:
-            type: string
-            enum:
-            - unknown
-            - unplanned
-            - missing_required
-            - invalid_value
-        schema_keywords:
-          type: array
-          items:
-            $ref: '#/components/schemas/SchemaKeyword'
-        json_patch:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataPlanPatch'
-        description:
-          type: string
-    DataPointValidator:
-      properties:
-        type:
-          type: string
-          default: json_schema
-          enum:
-          - json_schema
-        definition:
-          type: object
-          description: This should be a valid JSON schema
-      required:
-      - type
-      - definition
-    MatchType:
+            - $ref: '#/components/schemas/SchemaErrorList'
+            - $ref: '#/components/schemas/ErrorList'
+  schemas:
+    PromotionAction:
       type: string
+      title: PromotionAction
       enum:
-      - unknown
-      - screen_view
-      - custom_event
-      - user_attributes
-      - user_identities
-      - product_action
-      - promotion_action
-      - product_impression
-    ActivatedEnvironment:
-      type: string
-      enum:
-      - none
-      - development
-      - production
-      description: Data plan can be active in development, production & development (production), or neither. 'none' indicates it's inactive.
-    Criteria:
-      anyOf:
-      - $ref: '#/components/schemas/ScreenViewEventCriteria'
-      - $ref: '#/components/schemas/CustomEventCriteria'
-      - $ref: '#/components/schemas/UserAttributeCriteria'
-      - $ref: '#/components/schemas/CommerceActionEventCriteria'
-    SchemaErrorList:
+      - view
+      - click
+    UserAttributeCriteria:
       type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/SchemaError'
     SchemaKeyword:
       type: string
       title: SchemaKeyword
@@ -397,6 +290,69 @@ components:
       - description
       - examples
       - title
+    DataPlanVersion:
+      type: object
+      properties:
+        version:
+          type: integer
+        version_description:
+          type: string
+        created_on:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        last_modified_on:
+          type: string
+          format: date-time
+        last_modified_by:
+          type: string
+        version_document:
+          $ref: '#/components/schemas/VersionDocument'
+        activated_environment:
+          $ref: '#/components/schemas/ActivatedEnvironment'
+        data_plan_id:
+          type: string
+        quarantine_feed_id:
+          type:
+          - number
+          - 'null'
+          readOnly: true
+    VersionDocument:
+      type: object
+      description: This is the actual data plan, since a data plan can have many versions.
+      properties:
+        data_points:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataPoint'
+        active_transformation_ids:
+          type: array
+          items:
+            type: number
+          readOnly: true
+        transformations:
+          $ref: '#/components/schemas/DataPlanTransformation'
+    DataPointValidator:
+      properties:
+        type:
+          type: string
+          default: json_schema
+          enum:
+          - json_schema
+        definition:
+          type: object
+          description: This should be a valid JSON schema
+      required:
+      - type
+      - definition
+    ActivatedEnvironment:
+      type: string
+      enum:
+      - none
+      - development
+      - production
+      description: Data plan can be active in development, production & development (production), or neither. 'none' indicates it's inactive.
     DataPlanPatch:
       title: DataPlanPatch
       type: object
@@ -417,12 +373,99 @@ components:
           type: string
         value:
           type: string
+    SchemaError:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      properties:
+        match_key:
+          type: string
+        value:
+          type: string
+        schema_pointer:
+          type: string
+        event_pointer:
+          type: string
+        keyword:
+          type: string
+        error_type:
+          type: string
+      required:
+      - message
+      - match_key
+      - error_type
     ScreenViewEventCriteria:
       properties:
         screen_name:
           type: string
       required:
       - screen_name
+    DataPlanTransformation:
+      title: DataPlanTransformation
+      type: object
+      properties:
+        transformation_id:
+          type: number
+        transformation_name:
+          type: string
+        error_pointer:
+          type: string
+        validation_error_types:
+          type: array
+          items:
+            type: string
+            enum:
+            - unknown
+            - unplanned
+            - missing_required
+            - invalid_value
+        schema_keywords:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaKeyword'
+        json_patch:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataPlanPatch'
+        description:
+          type: string
+    CustomEventCriteria:
+      properties:
+        event_name:
+          type: string
+        custom_event_type:
+          type: string
+          enum:
+          - unknown
+          - navigation
+          - location
+          - search
+          - transaction
+          - user_content
+          - user_preference
+          - social
+          - other
+          - media
+      required:
+      - event_name
+      - custom_event_type
+    DataPointMatch:
+      properties:
+        type:
+          $ref: '#/components/schemas/MatchType'
+        criteria:
+          $ref: '#/components/schemas/Criteria'
+      required:
+      - type
+      - criteria
+      title: ''
+    SchemaErrorList:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaError'
     CommerceActionEventCriteria:
       title: CommerceActionEventCriteria
       type: object
@@ -432,22 +475,63 @@ components:
           - $ref: '#/components/schemas/ProductAction'
           - $ref: '#/components/schemas/PromotionAction'
       description: Data point match criteria object for commerce action events
-    PromotionAction:
-      type: string
-      title: PromotionAction
-      enum:
-      - view
-      - click
-    UserAttributeCriteria:
+    Error:
       type: object
+      properties:
+        message:
+          type: string
+    DataPoint:
+      type: object
+      properties:
+        description:
+          type: string
+        match:
+          $ref: '#/components/schemas/DataPointMatch'
+        validator:
+          $ref: '#/components/schemas/DataPointValidator'
+      required:
+      - match
+      - validator
+    MatchType:
+      type: string
+      enum:
+      - unknown
+      - screen_view
+      - custom_event
+      - user_attributes
+      - user_identities
+      - product_action
+      - promotion_action
+      - product_impression
+    Criteria:
+      anyOf:
+      - $ref: '#/components/schemas/ScreenViewEventCriteria'
+      - $ref: '#/components/schemas/CustomEventCriteria'
+      - $ref: '#/components/schemas/UserAttributeCriteria'
+      - $ref: '#/components/schemas/CommerceActionEventCriteria'
+    ProductAction:
+      type: string
+      title: ProductAction
+      enum:
+      - add_to_cart
+      - remove_from_cart
+      - checkout
+      - checkout_option
+      - click
+      - view_detail
+      - purchase
+      - refund
+      - add_to_wishlist
+      - remove_from_wish_list
+    ErrorList:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/Error'
   parameters:
-    plan_id:
-      name: plan_id
-      in: path
-      description: Slug ID of the data plan
-      required: true
-      schema:
-        type: string
     plan_version:
       name: plan_version
       in: path
@@ -455,97 +539,13 @@ components:
       required: true
       schema:
         type: integer
-  responses:
-    DataPlanVersionNotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            x-examples:
-              example-1:
-                errors:
-                - message: The specified version 10 in plan ID plan_1 was not found in workspace 1234.
-            properties:
-              errors:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      minLength: 1
-                      enum:
-                      - The specified plan ID {plan_id} in workspace {workspace_id} was not found.
-                      - The specified version {version_id} in plan ID {plan_id} was not found in workspace {workspace_id}.
-                  required:
-                  - message
-            required:
-            - errors
-          examples:
-            example-1:
-              value:
-                errors:
-                - message: The specified version 10 in plan ID plan_1 was not found in workspace 1234.
-    DataPlanVersionResponse:
-      description: Data plan version
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DataPlanVersion'
-    Unauthorized:
-      description: Unauthorized
-    Forbidden:
-      description: Forbidden
-    TooManyRequests:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Seconds to wait until the next request attempt
-          schema:
-            type: integer
-    BadSchema:
-      description: Bad Schema
-      content:
-        application/json:
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/SchemaErrorList'
-            - $ref: '#/components/schemas/ErrorList'
-    DeletePlanVersionBadRequest:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              errors:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      minLength: 1
-                      enum:
-                      - Unable to delete plan version - plans must contain at least one plan version.
-                      - Unable to delete plan version - this version is active in prod and cannot be deleted.
-                      - Unable to delete plan version. Plan versions with an associated quarantine feed can only be deleted through the UI.
-                  required:
-                  - message
-            required:
-            - errors
-          examples:
-            example-1:
-              value:
-                errors:
-                - message: Unable to delete plan version - plans must contain at least one plan version.
+    plan_id:
+      name: plan_id
+      in: path
+      description: Slug ID of the data plan
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

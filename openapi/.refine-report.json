@@ -1,16 +1,44 @@
 {
   "provider": "mparticle",
   "sources": [
-    "mparticle-bulkevents-api-openapi.yml",
-    "mparticle-events-api-openapi.yml"
+    "_original/mparticle-dataplanning-openapi-original.yml",
+    "_original/mparticle-events-openapi-original.yml",
+    "_original/mparticle-identity-swagger-original.yml"
   ],
   "outputs": [
-    "mparticle-bulkevents-api-openapi.yml",
-    "mparticle-events-api-openapi.yml"
+    "mparticle-data-plan-api-openapi.yml",
+    "mparticle-data-plan-version-api-openapi.yml",
+    "mparticle-events-api-openapi.yml",
+    "mparticle-identify-api-openapi.yml",
+    "mparticle-login-api-openapi.yml",
+    "mparticle-logout-api-openapi.yml",
+    "mparticle-modify-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "mparticle-dataplanning-openapi-original.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "mparticle-events-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "mparticle-identity-swagger-original.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "mparticle-identity-swagger-original.yml: tagged paths POST /identify -> Identify",
+    "mparticle-identity-swagger-original.yml: tagged paths POST /login -> Login",
+    "mparticle-identity-swagger-original.yml: tagged paths POST /logout -> Logout",
+    "mparticle-identity-swagger-original.yml: tagged paths POST /{mpid}/modify -> Modify",
+    "mparticle-identity-swagger-original.yml: declared missing tag: Identify",
+    "mparticle-identity-swagger-original.yml: declared missing tag: Login",
+    "mparticle-identity-swagger-original.yml: declared missing tag: Logout",
+    "mparticle-identity-swagger-original.yml: declared missing tag: Modify",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "mparticle-data-plan-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-data-plan-version-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-identify-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-login-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-logout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mparticle-modify-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
