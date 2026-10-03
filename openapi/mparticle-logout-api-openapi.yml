@@ -37,68 +37,6 @@ paths:
       operationId: postLogout
       x-operation-id-source: derived
 components:
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentityErrorResponse'
-    TooManyRequests:
-      description: Too many requests. Reference Retry-After header and try again later.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying the request.
-          schema:
-            type: integer
-    Unauthorized:
-      description: Unauthorized.
-    IdentifySuccessResponse:
-      description: IdentifyResponse containing the newly created or updated MPID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentifySuccessResponse'
-  parameters:
-    AuthHeaderDigest:
-      name: x-mp-signature
-      in: header
-      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
-      schema:
-        type: string
-    IdentifyBodyRequest:
-      description: IdentifyRequest used to create and update an Identity in the mParticle platform.
-      in: body
-      name: body
-      required: true
-      schema:
-        $ref: '#/components/schemas/IdentifyRequest'
-    ReadOnly:
-      name: read_only
-      in: query
-      description: Perform this action as a read-only operation for debugging purposes.
-      required: false
-      schema:
-        type: boolean
-    ReturnMatchedIds:
-      name: return_matches
-      in: query
-      description: Return the IDs used to perform the look-up in the response body.
-      required: false
-      schema:
-        type: boolean
-    AuthHeaderDate:
-      description: Current Date. REQUIRED for digest auth.
-      in: header
-      name: Date
-      schema:
-        type: string
-    AuthHeaderKey:
-      name: x-mp-key
-      in: header
-      description: API key for your mParticle workspace. REQUIRED for digest auth.
-      schema:
-        type: string
   schemas:
     IdentifyRequest:
       type: object
@@ -110,19 +48,6 @@ components:
             type: string
           known_identities:
             $ref: '#/components/schemas/Identities'
-    Platform:
-      enum:
-      - ios
-      - android
-      - web
-      - tvos
-      - roku
-      - alexa
-      - smart_tv
-      - fire
-      - xbox
-      - other
-      type: string
     IdentityBaseRequest:
       properties:
         client_sdk:
@@ -143,6 +68,19 @@ components:
       required:
       - environment
       type: object
+    Platform:
+      enum:
+      - ios
+      - android
+      - web
+      - tvos
+      - roku
+      - alexa
+      - smart_tv
+      - fire
+      - xbox
+      - other
+      type: string
     Identities:
       additionalProperties: false
       properties:
@@ -191,6 +129,16 @@ components:
         device_application_stamp:
           type: string
       type: object
+    ClientSdk:
+      description: Describes the client SDK originating the request.
+      properties:
+        platform:
+          $ref: '#/components/schemas/Platform'
+        sdk_vendor:
+          type: string
+        sdk_version:
+          type: string
+      type: object
     IdentityErrorResponse:
       description: Indicates one or more errors occured during the request.
       properties:
@@ -203,16 +151,6 @@ components:
                 type: string
             type: object
           type: array
-      type: object
-    ClientSdk:
-      description: Describes the client SDK originating the request.
-      properties:
-        platform:
-          $ref: '#/components/schemas/Platform'
-        sdk_vendor:
-          type: string
-        sdk_version:
-          type: string
       type: object
     IdentifySuccessResponse:
       properties:
@@ -229,6 +167,68 @@ components:
           readOnly: true
           type: boolean
       type: object
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
+    Unauthorized:
+      description: Unauthorized.
+    IdentifySuccessResponse:
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentifySuccessResponse'
+  parameters:
+    AuthHeaderDigest:
+      name: x-mp-signature
+      in: header
+      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
+      schema:
+        type: string
+    ReadOnly:
+      name: read_only
+      in: query
+      description: Perform this action as a read-only operation for debugging purposes.
+      required: false
+      schema:
+        type: boolean
+    AuthHeaderDate:
+      description: Current Date. REQUIRED for digest auth.
+      in: header
+      name: Date
+      schema:
+        type: string
+    AuthHeaderKey:
+      name: x-mp-key
+      in: header
+      description: API key for your mParticle workspace. REQUIRED for digest auth.
+      schema:
+        type: string
+    IdentifyBodyRequest:
+      description: IdentifyRequest used to create and update an Identity in the mParticle platform.
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/components/schemas/IdentifyRequest'
+    ReturnMatchedIds:
+      name: return_matches
+      in: query
+      description: Return the IDs used to perform the look-up in the response body.
+      required: false
+      schema:
+        type: boolean
   securitySchemes:
     BasicSecurity:
       type: http

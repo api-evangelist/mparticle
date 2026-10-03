@@ -37,42 +37,7 @@ paths:
       operationId: postByMpidModify
       x-operation-id-source: derived
 components:
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentityErrorResponse'
-    TooManyRequests:
-      description: Too many requests. Reference Retry-After header and try again later.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying the request.
-          schema:
-            type: integer
-    ModifySuccessResponse:
-      description: IdentifyResponse containing the newly created or updated MPID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModifySuccessResponse'
-    Unauthorized:
-      description: Unauthorized.
   parameters:
-    AuthHeaderDigest:
-      name: x-mp-signature
-      in: header
-      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
-      schema:
-        type: string
-    Mpid:
-      name: mpid
-      in: path
-      description: mParticle User Id
-      required: true
-      schema:
-        type: string
     ModifyBodyRequest:
       description: ModifyRequest used to modify an existing identity.
       in: body
@@ -80,6 +45,19 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/ModifyRequest'
+    Mpid:
+      name: mpid
+      in: path
+      description: mParticle User Id
+      required: true
+      schema:
+        type: string
+    AuthHeaderDigest:
+      name: x-mp-signature
+      in: header
+      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
+      schema:
+        type: string
     AuthHeaderDate:
       description: Current Date. REQUIRED for digest auth.
       in: header
@@ -93,39 +71,6 @@ components:
       schema:
         type: string
   schemas:
-    Platform:
-      enum:
-      - ios
-      - android
-      - web
-      - tvos
-      - roku
-      - alexa
-      - smart_tv
-      - fire
-      - xbox
-      - other
-      type: string
-    IdentityBaseRequest:
-      properties:
-        client_sdk:
-          $ref: '#/components/schemas/ClientSdk'
-        context:
-          description: Previous context string.
-          type: string
-        environment:
-          description: The environment to used to apply this change. (required)
-          enum:
-          - production
-          - development
-          type: string
-        request_id:
-          type: string
-        request_timestamp_ms:
-          type: integer
-      required:
-      - environment
-      type: object
     IdentityChange:
       type: object
       required:
@@ -159,6 +104,63 @@ components:
           - other
           - twitter
           - yahoo
+    ModifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/IdentityBaseRequest'
+      - type: object
+        properties:
+          identity_changes:
+            items:
+              $ref: '#/components/schemas/IdentityChange'
+            type: array
+        required:
+        - identity_changes
+    IdentityBaseRequest:
+      properties:
+        client_sdk:
+          $ref: '#/components/schemas/ClientSdk'
+        context:
+          description: Previous context string.
+          type: string
+        environment:
+          description: The environment to used to apply this change. (required)
+          enum:
+          - production
+          - development
+          type: string
+        request_id:
+          type: string
+        request_timestamp_ms:
+          type: integer
+      required:
+      - environment
+      type: object
+    Platform:
+      enum:
+      - ios
+      - android
+      - web
+      - tvos
+      - roku
+      - alexa
+      - smart_tv
+      - fire
+      - xbox
+      - other
+      type: string
+    ModifySuccessResponse:
+      type: object
+    ClientSdk:
+      description: Describes the client SDK originating the request.
+      properties:
+        platform:
+          $ref: '#/components/schemas/Platform'
+        sdk_vendor:
+          type: string
+        sdk_version:
+          type: string
+      type: object
     IdentityErrorResponse:
       description: Indicates one or more errors occured during the request.
       properties:
@@ -172,30 +174,28 @@ components:
             type: object
           type: array
       type: object
-    ModifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/IdentityBaseRequest'
-      - type: object
-        properties:
-          identity_changes:
-            items:
-              $ref: '#/components/schemas/IdentityChange'
-            type: array
-        required:
-        - identity_changes
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
     ModifySuccessResponse:
-      type: object
-    ClientSdk:
-      description: Describes the client SDK originating the request.
-      properties:
-        platform:
-          $ref: '#/components/schemas/Platform'
-        sdk_vendor:
-          type: string
-        sdk_version:
-          type: string
-      type: object
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ModifySuccessResponse'
+    Unauthorized:
+      description: Unauthorized.
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
   securitySchemes:
     BasicSecurity:
       type: http
