@@ -127,18 +127,69 @@ paths:
       summary: Create a Data Plan Version
 components:
   schemas:
-    DataPoint:
+    CommerceActionEventCriteria:
+      title: CommerceActionEventCriteria
       type: object
       properties:
-        description:
+        action:
+          oneOf:
+          - $ref: '#/components/schemas/ProductAction'
+          - $ref: '#/components/schemas/PromotionAction'
+      description: Data point match criteria object for commerce action events
+    DataPlanPatch:
+      title: DataPlanPatch
+      type: object
+      properties:
+        op:
           type: string
-        match:
-          $ref: '#/components/schemas/DataPointMatch'
-        validator:
-          $ref: '#/components/schemas/DataPointValidator'
+          enum:
+          - unknown
+          - add
+          - remove
+          - replace
+          - copy
+          - move
+          - test
+        from:
+          type: string
+        path:
+          type: string
+        value:
+          type: string
+    ScreenViewEventCriteria:
+      properties:
+        screen_name:
+          type: string
       required:
-      - match
-      - validator
+      - screen_name
+    DataPlanVersion:
+      type: object
+      properties:
+        version:
+          type: integer
+        version_description:
+          type: string
+        created_on:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        last_modified_on:
+          type: string
+          format: date-time
+        last_modified_by:
+          type: string
+        version_document:
+          $ref: '#/components/schemas/VersionDocument'
+        activated_environment:
+          $ref: '#/components/schemas/ActivatedEnvironment'
+        data_plan_id:
+          type: string
+        quarantine_feed_id:
+          type:
+          - number
+          - 'null'
+          readOnly: true
     SchemaKeyword:
       type: string
       title: SchemaKeyword
@@ -203,27 +254,6 @@ components:
       - description
       - examples
       - title
-    DataPointMatch:
-      properties:
-        type:
-          $ref: '#/components/schemas/MatchType'
-        criteria:
-          $ref: '#/components/schemas/Criteria'
-      required:
-      - type
-      - criteria
-      title: ''
-    MatchType:
-      type: string
-      enum:
-      - unknown
-      - screen_view
-      - custom_event
-      - user_attributes
-      - user_identities
-      - product_action
-      - promotion_action
-      - product_impression
     SchemaErrorList:
       type: object
       properties:
@@ -231,115 +261,45 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SchemaError'
-    CommerceActionEventCriteria:
-      title: CommerceActionEventCriteria
+    SchemaError:
       type: object
+      allOf:
+      - $ref: '#/components/schemas/Error'
       properties:
-        action:
-          oneOf:
-          - $ref: '#/components/schemas/ProductAction'
-          - $ref: '#/components/schemas/PromotionAction'
-      description: Data point match criteria object for commerce action events
-    DataPlanVersion:
-      type: object
-      properties:
-        version:
-          type: integer
-        version_description:
+        match_key:
           type: string
-        created_on:
+        value:
           type: string
-          format: date-time
-        created_by:
+        schema_pointer:
           type: string
-        last_modified_on:
+        event_pointer:
           type: string
-          format: date-time
-        last_modified_by:
+        keyword:
           type: string
-        version_document:
-          $ref: '#/components/schemas/VersionDocument'
-        activated_environment:
-          $ref: '#/components/schemas/ActivatedEnvironment'
-        data_plan_id:
+        error_type:
           type: string
-        quarantine_feed_id:
-          type:
-          - number
-          - 'null'
-          readOnly: true
-    ProductAction:
+      required:
+      - message
+      - match_key
+      - error_type
+    ActivatedEnvironment:
       type: string
-      title: ProductAction
       enum:
-      - add_to_cart
-      - remove_from_cart
-      - checkout
-      - checkout_option
-      - click
-      - view_detail
-      - purchase
-      - refund
-      - add_to_wishlist
-      - remove_from_wish_list
+      - none
+      - development
+      - production
+      description: Data plan can be active in development, production & development (production), or neither. 'none' indicates it's inactive.
     Error:
       type: object
       properties:
         message:
           type: string
-    DataPointValidator:
-      properties:
-        type:
-          type: string
-          default: json_schema
-          enum:
-          - json_schema
-        definition:
-          type: object
-          description: This should be a valid JSON schema
-      required:
-      - type
-      - definition
-    DataPlanPatch:
-      title: DataPlanPatch
-      type: object
-      properties:
-        op:
-          type: string
-          enum:
-          - unknown
-          - add
-          - remove
-          - replace
-          - copy
-          - move
-          - test
-        from:
-          type: string
-        path:
-          type: string
-        value:
-          type: string
-    CustomEventCriteria:
-      properties:
-        event_name:
-          type: string
-        custom_event_type:
-          type: string
-          enum:
-          - unknown
-          - navigation
-          - location
-          - search
-          - transaction
-          - user_content
-          - user_preference
-          - social
-          - other
-          - media
-      required:
-      - event_name
-      - custom_event_type
+    PromotionAction:
+      type: string
+      title: PromotionAction
+      enum:
+      - view
+      - click
     DataPlanTransformation:
       title: DataPlanTransformation
       type: object
@@ -369,35 +329,68 @@ components:
             $ref: '#/components/schemas/DataPlanPatch'
         description:
           type: string
-    PromotionAction:
-      type: string
-      title: PromotionAction
-      enum:
-      - view
-      - click
-    ActivatedEnvironment:
-      type: string
-      enum:
-      - none
-      - development
-      - production
-      description: Data plan can be active in development, production & development (production), or neither. 'none' indicates it's inactive.
-    UserAttributeCriteria:
-      type: object
     Criteria:
       anyOf:
       - $ref: '#/components/schemas/ScreenViewEventCriteria'
       - $ref: '#/components/schemas/CustomEventCriteria'
       - $ref: '#/components/schemas/UserAttributeCriteria'
       - $ref: '#/components/schemas/CommerceActionEventCriteria'
-    ErrorList:
+    DataPointMatch:
+      properties:
+        type:
+          $ref: '#/components/schemas/MatchType'
+        criteria:
+          $ref: '#/components/schemas/Criteria'
+      required:
+      - type
+      - criteria
+      title: ''
+    DataPoint:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/Error'
+        description:
+          type: string
+        match:
+          $ref: '#/components/schemas/DataPointMatch'
+        validator:
+          $ref: '#/components/schemas/DataPointValidator'
+      required:
+      - match
+      - validator
+    CustomEventCriteria:
+      properties:
+        event_name:
+          type: string
+        custom_event_type:
+          type: string
+          enum:
+          - unknown
+          - navigation
+          - location
+          - search
+          - transaction
+          - user_content
+          - user_preference
+          - social
+          - other
+          - media
+      required:
+      - event_name
+      - custom_event_type
+    ProductAction:
+      type: string
+      title: ProductAction
+      enum:
+      - add_to_cart
+      - remove_from_cart
+      - checkout
+      - checkout_option
+      - click
+      - view_detail
+      - purchase
+      - refund
+      - add_to_wishlist
+      - remove_from_wish_list
     VersionDocument:
       type: object
       description: This is the actual data plan, since a data plan can have many versions.
@@ -413,74 +406,43 @@ components:
           readOnly: true
         transformations:
           $ref: '#/components/schemas/DataPlanTransformation'
-    SchemaError:
+    DataPointValidator:
+      properties:
+        type:
+          type: string
+          default: json_schema
+          enum:
+          - json_schema
+        definition:
+          type: object
+          description: This should be a valid JSON schema
+      required:
+      - type
+      - definition
+    MatchType:
+      type: string
+      enum:
+      - unknown
+      - screen_view
+      - custom_event
+      - user_attributes
+      - user_identities
+      - product_action
+      - promotion_action
+      - product_impression
+    UserAttributeCriteria:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/Error'
+    ErrorList:
+      type: object
       properties:
-        match_key:
-          type: string
-        value:
-          type: string
-        schema_pointer:
-          type: string
-        event_pointer:
-          type: string
-        keyword:
-          type: string
-        error_type:
-          type: string
-      required:
-      - message
-      - match_key
-      - error_type
-    ScreenViewEventCriteria:
-      properties:
-        screen_name:
-          type: string
-      required:
-      - screen_name
+        errors:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/Error'
   responses:
-    DeletePlanVersionBadRequest:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              errors:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      minLength: 1
-                      enum:
-                      - Unable to delete plan version - plans must contain at least one plan version.
-                      - Unable to delete plan version - this version is active in prod and cannot be deleted.
-                      - Unable to delete plan version. Plan versions with an associated quarantine feed can only be deleted through the UI.
-                  required:
-                  - message
-            required:
-            - errors
-          examples:
-            example-1:
-              value:
-                errors:
-                - message: Unable to delete plan version - plans must contain at least one plan version.
-    TooManyRequests:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Seconds to wait until the next request attempt
-          schema:
-            type: integer
-    Forbidden:
-      description: Forbidden
+    Unauthorized:
+      description: Unauthorized
     DataPlanVersionNotFound:
       description: Not Found
       content:
@@ -515,6 +477,46 @@ components:
               value:
                 errors:
                 - message: The specified version 10 in plan ID plan_1 was not found in workspace 1234.
+    Forbidden:
+      description: Forbidden
+    TooManyRequests:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Seconds to wait until the next request attempt
+          schema:
+            type: integer
+    DeletePlanVersionBadRequest:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              errors:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      minLength: 1
+                      enum:
+                      - Unable to delete plan version - plans must contain at least one plan version.
+                      - Unable to delete plan version - this version is active in prod and cannot be deleted.
+                      - Unable to delete plan version. Plan versions with an associated quarantine feed can only be deleted through the UI.
+                  required:
+                  - message
+            required:
+            - errors
+          examples:
+            example-1:
+              value:
+                errors:
+                - message: Unable to delete plan version - plans must contain at least one plan version.
     BadSchema:
       description: Bad Schema
       content:
@@ -523,8 +525,6 @@ components:
             oneOf:
             - $ref: '#/components/schemas/SchemaErrorList'
             - $ref: '#/components/schemas/ErrorList'
-    Unauthorized:
-      description: Unauthorized
     DataPlanVersionResponse:
       description: Data plan version
       content:
@@ -532,13 +532,6 @@ components:
           schema:
             $ref: '#/components/schemas/DataPlanVersion'
   parameters:
-    plan_version:
-      name: plan_version
-      in: path
-      description: Version of the plan to fetch
-      required: true
-      schema:
-        type: integer
     plan_id:
       name: plan_id
       in: path
@@ -546,6 +539,13 @@ components:
       required: true
       schema:
         type: string
+    plan_version:
+      name: plan_version
+      in: path
+      description: Version of the plan to fetch
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

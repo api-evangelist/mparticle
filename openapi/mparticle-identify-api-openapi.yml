@@ -37,37 +37,29 @@ paths:
       operationId: postIdentify
       x-operation-id-source: derived
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
+    IdentifySuccessResponse:
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentifySuccessResponse'
+    Unauthorized:
+      description: Unauthorized.
   schemas:
-    IdentifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/IdentityBaseRequest'
-      - type: object
-        properties:
-          previous_mpid:
-            type: string
-          known_identities:
-            $ref: '#/components/schemas/Identities'
-    IdentityBaseRequest:
-      properties:
-        client_sdk:
-          $ref: '#/components/schemas/ClientSdk'
-        context:
-          description: Previous context string.
-          type: string
-        environment:
-          description: The environment to used to apply this change. (required)
-          enum:
-          - production
-          - development
-          type: string
-        request_id:
-          type: string
-        request_timestamp_ms:
-          type: integer
-      required:
-      - environment
-      type: object
     Platform:
       enum:
       - ios
@@ -129,28 +121,35 @@ components:
         device_application_stamp:
           type: string
       type: object
-    ClientSdk:
-      description: Describes the client SDK originating the request.
-      properties:
-        platform:
-          $ref: '#/components/schemas/Platform'
-        sdk_vendor:
-          type: string
-        sdk_version:
-          type: string
+    IdentifyRequest:
       type: object
-    IdentityErrorResponse:
-      description: Indicates one or more errors occured during the request.
+      allOf:
+      - $ref: '#/components/schemas/IdentityBaseRequest'
+      - type: object
+        properties:
+          previous_mpid:
+            type: string
+          known_identities:
+            $ref: '#/components/schemas/Identities'
+    IdentityBaseRequest:
       properties:
-        errors:
-          items:
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-            type: object
-          type: array
+        client_sdk:
+          $ref: '#/components/schemas/ClientSdk'
+        context:
+          description: Previous context string.
+          type: string
+        environment:
+          description: The environment to used to apply this change. (required)
+          enum:
+          - production
+          - development
+          type: string
+        request_id:
+          type: string
+        request_timestamp_ms:
+          type: integer
+      required:
+      - environment
       type: object
     IdentifySuccessResponse:
       properties:
@@ -167,39 +166,47 @@ components:
           readOnly: true
           type: boolean
       type: object
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentityErrorResponse'
-    TooManyRequests:
-      description: Too many requests. Reference Retry-After header and try again later.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying the request.
-          schema:
-            type: integer
-    Unauthorized:
-      description: Unauthorized.
-    IdentifySuccessResponse:
-      description: IdentifyResponse containing the newly created or updated MPID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentifySuccessResponse'
+    IdentityErrorResponse:
+      description: Indicates one or more errors occured during the request.
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            type: object
+          type: array
+      type: object
+    ClientSdk:
+      description: Describes the client SDK originating the request.
+      properties:
+        platform:
+          $ref: '#/components/schemas/Platform'
+        sdk_vendor:
+          type: string
+        sdk_version:
+          type: string
+      type: object
   parameters:
+    ReadOnly:
+      name: read_only
+      in: query
+      description: Perform this action as a read-only operation for debugging purposes.
+      required: false
+      schema:
+        type: boolean
     AuthHeaderDigest:
       name: x-mp-signature
       in: header
       description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
       schema:
         type: string
-    ReadOnly:
-      name: read_only
+    ReturnMatchedIds:
+      name: return_matches
       in: query
-      description: Perform this action as a read-only operation for debugging purposes.
+      description: Return the IDs used to perform the look-up in the response body.
       required: false
       schema:
         type: boolean
@@ -222,13 +229,6 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/IdentifyRequest'
-    ReturnMatchedIds:
-      name: return_matches
-      in: query
-      description: Return the IDs used to perform the look-up in the response body.
-      required: false
-      schema:
-        type: boolean
   securitySchemes:
     BasicSecurity:
       type: http
