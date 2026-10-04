@@ -1,0 +1,69 @@
+slug: mparticle
+provider: mParticle
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Identify
+  spec_file: mparticle-identify-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: POST /identify postIdentify 'Create identify'; schemas IdentifyRequest, Identities; 'mParticle
+    Identity API'
+  reason: mParticle's IDSync identify endpoint resolves incoming device/user identifiers to a unified
+    customer profile (MPID). The Identities/IdentifyRequest schemas are identity-resolution payloads for
+    a CDP customer master, not authentication of an API caller — hence Customer Data Management (identity
+    resolution, golden record).
+- tag: Modify
+  spec_file: mparticle-modify-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.78
+  evidence: POST /{mpid}/modify postByMpidModify; schemas IdentityChange, ModifyRequest, ModifySuccessResponse
+  reason: Adds, removes or changes identities on a specific customer profile (mpid) via IdentityChange
+    — maintenance of the unified customer record / identity graph in the CDP, i.e. Customer Data Management.
+- tag: Data Plan
+  spec_file: mparticle-data-plan-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: POST /  create-plan  Create Data Plan; POST /validate  validate-plan-document  Validate Event
+    Batch; schemas DataPoint, DataPointValidator, SchemaErrorList
+  reason: Data plans define and enforce the expected schema/standards for incoming event data, with validation
+    of event batches against the plan — data ownership/policy/standards work, i.e. Data Governance Management.
+    A telemetry-schema-governance reading (BC-4280.20) is a plausible alternative, hence 0.7.
+- tag: Data Plan Version
+  spec_file: mparticle-data-plan-version-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: POST /{plan_id}/versions  create-plan-version  Create a Data Plan Version; schemas DataPlanVersion,
+    DataPlanPatch, VersionDocument, SchemaError
+  reason: Versioned lifecycle of the data plan documents that codify event schema standards and validation
+    criteria — governance of data standards. Same reasoning and same residual ambiguity with telemetry
+    schema governance as the parent Data Plan tag.
+- tag: Login
+  spec_file: mparticle-login-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /login postLogin 'Create login'; schemas IdentifyRequest, Identities, IdentityErrorResponse
+    under 'mParticle Identity API'
+  reason: 'Despite the auth-sounding tag, this is the IDSync /login endpoint sharing the same IdentifyRequest/Identities
+    schemas as /identify: it associates a known user''s identities with a profile for customer identity
+    resolution. Slight homograph risk (could be read as session authentication) keeps confidence moderate.'

@@ -271,6 +271,9 @@ apis:
   - type: Postman
     url: https://docs.mparticle.com/downloads/dataplanning.postman_collection.json
 common:
+  - type: CapabilityMap
+    url: capabilities/mparticle-capability-edges.yml
+    name: mParticle Business Capability Map
   - type: ParentCompany
     url: https://apis.io/providers/rokt/
     name: Rokt
