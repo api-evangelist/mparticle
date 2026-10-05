@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.mparticle.com/downloads/mparticle.events.oas.yaml",
+ "requested_url": "https://docs.mparticle.com/downloads/mparticle.events.oas.yaml",
+ "status": 200,
+ "content_type": "application/yaml",
+ "bytes": 32130,
+ "sha256": "22e197c98aa310d933c1b23a245c8f4a0f662c40cd9dc17a1ae015886525790f",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
