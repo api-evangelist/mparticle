@@ -2,7 +2,22 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://aws.amazon.com/marketplace/
-marketplace_apps: []
+- https://docs.mparticle.com/integrations/
+- https://hightouch.com/docs/destinations/mparticle
+marketplace_apps:
+- marketplace: coverage
+  channel: coverage-list
+  app: mparticle
+  url: https://docs.mparticle.com/integrations/
+  app_count: 227
+  adapter: sweep-cdp.py:src_mparticle
+  listed: 264
+  destinations: 214
+  sources: 50
+  linked: 100
+  unlinked: 136
+  identity: domain (first external link on the integration's doc page)
+  status: ok
 edges:
 - partner_name: AWS Marketplace
   partner: amazon-web-services
@@ -20,3 +35,2198 @@ edges:
   seller_name: mParticle
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: ABTasty
+  partner: ab-tasty
+  partner_match: domain
+  partner_url: http://www.abtasty.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/abtasty/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - abtasty
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Adobe Audience Manager
+  partner: adobe
+  partner_match: domain+name-among-holders
+  partner_url: https://marketing.adobe.com/resources/help/en_US/aam/create-datasource.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/adobe-audience-manager/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-audience-manager
+      - adobe-experience-platform
+      - adobe-target
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Adobe Campaign Manager
+  partner: adobe-campaign
+  partner_match: domain+name-among-holders
+  partner_url: https://www.adobe.com/experience-cloud/topics/campaign-management.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/adobe-campaign-manager/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-campaign-manager
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Airship
+  partner: airship
+  partner_match: domain
+  partner_url: https://www.airship.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/airship/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - airship
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - airship
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Algolia
+  partner: algolia
+  partner_match: domain
+  partner_url: https://www.algolia.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/algolia/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - algolia
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Advertising
+  partner: amazon
+  partner_match: domain+name-among-holders
+  partner_url: https://advertising.amazon.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazon-advertising/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-advertising
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Kinesis
+  partner: kinesis
+  partner_match: domain+name-among-holders
+  partner_url: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazon-kinesis/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-kinesis
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Kinesis Firehose
+  partner: amazon-kinesis-firehose
+  partner_match: domain+name-among-holders
+  partner_url: http://docs.aws.amazon.com/firehose/latest/dev/before-you-begin.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazon-kinesis-firehose/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-kinesis-firehose
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon Redshift
+  partner: amazon-redshift
+  partner_match: domain+name-among-holders
+  partner_url: https://docs.aws.amazon.com/redshift/latest/dg/tutorial-loading-data-vacuum.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazon-redshift/data-warehouse/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazon-redshift
+      integration_types:
+      - data-warehouse
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon S3
+  partner: amazon-s3
+  partner_match: domain+name-among-holders
+  partner_url: https://aws.amazon.com/s3/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazons3/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazons3
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon SNS
+  partner: amazon-sns
+  partner_match: domain+name-among-holders
+  partner_url: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-sns
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazonsns/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazonsns
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amobee
+  partner: amobee
+  partner_match: domain
+  partner_url: https://www.amobee.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amobee/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amobee
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amazon SQS
+  partner: amazon-sqs
+  partner_match: domain+name-among-holders
+  partner_url: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-sqs
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amazonsqs/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amazonsqs
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Amplitude
+  partner: amplitude
+  partner_match: domain
+  partner_url: https://amplitude.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/amplitude/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - amplitude
+      integration_types:
+      - event
+      - forwarding-dsr
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Anodot
+  partner: anodot
+  partner_match: domain
+  partner_url: https://www.anodot.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/anodot/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - anodot
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Antavo
+  partner: antavo
+  partner_match: domain
+  partner_url: https://antavo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/antavo/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - antavo
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: AppsFlyer
+  partner: appsflyer
+  partner_match: domain
+  partner_url: https://support.appsflyer.com/hc/en-us/articles/207033816-Integrated-Media-Source-Partner-Configuration
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/appsflyer/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - appsflyer
+      integration_types:
+      - event
+      - forwarding-dsr
+    source:
+      catalog_entries:
+      - appsflyer
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Apptentive
+  partner: apptentive
+  partner_match: domain
+  partner_url: https://be.apptentive.com/apps/current/settings/api
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/apptentive/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - apptentive
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Apptimize
+  partner: apptimize
+  partner_match: domain
+  partner_url: https://apptimize.com/admin/settings/apps
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/apptimize/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - apptimize
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: AppLovin
+  partner: applovin
+  partner_match: domain
+  partner_url: https://www.applovin.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/applovin/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - applovin
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Awin
+  partner: awin-affiliate
+  partner_match: domain
+  partner_url: https://www.awin.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/awin/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - awin
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Azure Blob Storage
+  partner: microsoft-azure-blob-storage
+  partner_match: domain+name-among-holders
+  partner_url: https://azure.microsoft.com/en-us/services/storage/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/azure-blob-storage/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - azure-blob-storage
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bluecore
+  partner: bluecore
+  partner_match: domain
+  partner_url: https://www.bluecore.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/bluecore/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bluecore
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Blueshift
+  partner: blueshift
+  partner_match: domain
+  partner_url: https://developer.blueshift.com/reference#authorization-1
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/blueshift/forwarding-dsr/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - blueshift
+      integration_types:
+      - event
+      - forwarding-dsr
+    source:
+      catalog_entries:
+      - blueshift
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Button
+  partner: usebutton
+  partner_match: domain
+  partner_url: https://www.usebutton.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/button/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - button
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Bugsnag
+  partner: bugsnag
+  partner_match: domain
+  partner_url: https://www.bugsnag.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/bugsnag/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bugsnag
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: comScore
+  partner: comscore
+  partner_match: domain
+  partner_url: https://direct.comscore.com/Default.aspx
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/comscore/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - comscore
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Criteo
+  partner: criteo
+  partner_match: domain+name-among-holders
+  partner_url: https://www.criteo.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/criteo/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - criteo
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Cordial
+  partner: cordial
+  partner_match: domain
+  partner_url: http://www.cordial.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/cordial/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - cordial
+      integration_types:
+      - audience
+    source:
+      catalog_entries:
+      - cordial
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Crossing Minds
+  partner: crossing-minds
+  partner_match: domain
+  partner_url: https://crossingminds.com/?utm_source=mparticle
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/crossing-minds/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - crossing-minds
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Databricks
+  partner: databricks
+  partner_match: domain+name-among-holders
+  partner_url: https://docs.databricks.com/en/admin/users-groups/service-principals.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/databricks/data-warehouse/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - databricks
+      integration_types:
+      - data-warehouse
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Datadog
+  partner: datadog
+  partner_match: domain+name-among-holders
+  partner_url: https://www.datadoghq.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/datadog/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - datadog
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Customer.io
+  partner: customer-io
+  partner_match: domain
+  partner_url: https://customer.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/customerio/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - customerio
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - customerio
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Dynamic Yield
+  partner: dynamic-yield
+  partner_match: domain
+  partner_url: https://www.dynamicyield.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/dynamic-yield/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - dynamic-yield
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Didomi
+  partner: didomi
+  partner_match: domain
+  partner_url: https://www.didomi.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/didomi/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - didomi
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Emarsys
+  partner: emarsys
+  partner_match: domain
+  partner_url: https://www.emarsys.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/emarsys/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - emarsys
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Epsilon
+  partner: epsilon
+  partner_match: domain
+  partner_url: https://us.epsilon.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/epsilon/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - epsilon
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Facebook
+  partner: facebook
+  partner_match: domain+name-among-holders
+  partner_url: https://developers.facebook.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/facebook/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - facebook
+      - facebook-offline-conversions
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Analytics for Firebase
+  partner: google
+  partner_match: domain+name-among-holders
+  partner_url: https://console.firebase.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/firebase/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - firebase
+      - google-enhanced-conversions
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Flurry
+  partner: flurry
+  partner_match: domain
+  partner_url: https://www.flurry.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/flurry/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - flurry
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Foursquare
+  partner: foursquare
+  partner_match: domain+name-among-holders
+  partner_url: https://www.foursquare.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/foursquare/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - foursquare
+      integration_types:
+      - audience
+    source:
+      catalog_entries:
+      - foursquare
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Ad Manager
+  partner: google-ad-manager
+  partner_match: domain+name-among-holders
+  partner_url: https://admanager.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-ad-manager/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-ad-manager
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Friendbuy
+  partner: friendbuy
+  partner_match: domain
+  partner_url: https://www.friendbuy.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/friendbuy/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - friendbuy
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Ads
+  partner: google-ads
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.google.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-ads/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-ads
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Analytics 4
+  partner: google-analytics
+  partner_match: domain+name-among-holders
+  partner_url: https://support.google.com/analytics/answer/9306384
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-analytics-4/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-analytics-4
+      - google-analytics
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google BigQuery
+  partner: google-bigquery
+  partner_match: domain+name-among-holders
+  partner_url: https://cloud.google.com/bigquery/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-bigquery/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-bigquery
+      integration_types:
+      - audience
+      - data-warehouse
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Marketing Platform
+  partner: google-marketing-platform
+  partner_match: domain+name-among-holders
+  partner_url: https://support.google.com/authorizedbuyers/answer/2657992?hl=en&#x26;sjid=16149061868104996856-NA
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-marketing-platform/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-marketing-platform
+      - google-marketing-platform-offline
+      integration_types:
+      - audience
+      - cookie-sync
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Google Tag Manager
+  partner: google-tag-manager
+  partner_match: domain+name-among-holders
+  partner_url: https://tagmanager.google.com/#/home
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-tag-manager/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-tag-manager
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Heap
+  partner: heap
+  partner_match: domain
+  partner_url: https://www.heap.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/heap/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - heap
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Ibotta
+  partner: ibotta
+  partner_match: domain
+  partner_url: https://ibotta.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/ibotta/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - ibotta
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Impact
+  partner: impact
+  partner_match: domain
+  partner_url: http://impact.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/impact/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - impact
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: InMobi
+  partner: inmobi
+  partner_match: domain
+  partner_url: https://www.inmobi.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/inmobi/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - inmobi
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Jampp
+  partner: jampp
+  partner_match: domain
+  partner_url: http://jampp.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/jampp/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - jampp
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kafka
+  partner: apache-kafka
+  partner_match: domain+name-among-holders
+  partner_url: https://kafka.apache.org/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/kafka/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kafka
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Iterable
+  partner: iterable
+  partner_match: domain
+  partner_url: https://www.iterable.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/iterable/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - iterable
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - iterable
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kissmetrics
+  partner: kissmetrics
+  partner_match: domain
+  partner_url: https://support.kissmetrics.io/reference/api-specifications-1
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/kissmetrics/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kissmetrics
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Klaviyo
+  partner: klaviyo
+  partner_match: domain
+  partner_url: https://www.klaviyo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/klaviyo/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - klaviyo
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Kubit
+  partner: kubit-ai-inc
+  partner_match: domain
+  partner_url: http://www.kubit.ai
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/kubit/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - kubit
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: LaunchDarkly
+  partner: launchdarkly
+  partner_match: domain
+  partner_url: https://launchdarkly.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/launchdarkly/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - launchdarkly
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Leanplum
+  partner: leanplum
+  partner_match: domain
+  partner_url: https://www.leanplum.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/leanplum/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - leanplum
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - leanplum
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Localytics
+  partner: localytics
+  partner_match: domain
+  partner_url: https://docs.localytics.com/dev/android.html#gcm-add-api-key-to-dashboard-push-android
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/localytics/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - localytics
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Liveramp
+  partner: liveramp
+  partner_match: domain
+  partner_url: https://liveramp.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/liveramp/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - liveramp
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MadHive
+  partner: madhive
+  partner_match: domain
+  partner_url: https://www.madhive.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/madhive/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - madhive
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Mailchimp
+  partner: mailchimp
+  partner_match: domain+name-among-holders
+  partner_url: http://kb.mailchimp.com/article/where-can-i-find-my-api-key
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/mailchimp/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mailchimp
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - mailchimp
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Ads
+  partner: microsoft
+  partner_match: domain+name-among-holders
+  partner_url: https://learn.microsoft.com/en-us/advertising/guides/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/microsoft/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - microsoft
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MediaMath
+  partner: mediamath
+  partner_match: domain
+  partner_url: https://www.mediamath.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/mediamath/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mediamath
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Microsoft Azure Event Hubs
+  partner: microsoft-azure-event-hubs
+  partner_match: domain+name-among-holders
+  partner_url: https://azure.microsoft.com/en-us/services/event-hubs/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/microsoft-azure-event-hubs/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - microsoft-azure-event-hubs
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Mixpanel
+  partner: mixpanel
+  partner_match: domain
+  partner_url: https://www.mixpanel.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/mixpanel/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mixpanel
+      integration_types:
+      - audience
+      - event
+      - forwarding-dsr
+    source:
+      catalog_entries:
+      - mixpanel
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: MoEngage
+  partner: moengage
+  partner_match: domain
+  partner_url: https://www.moengage.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/moengage/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - moengage
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - moengage
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Monetate
+  partner: monetate
+  partner_match: domain
+  partner_url: https://www.monetate.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/monetate/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - monetate
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Movable Ink - V2
+  partner: movable-ink
+  partner_match: domain
+  partner_url: https://movableink.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/movableink-v2/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - movableink-v2
+      - movableink
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: OneTrust
+  partner: onetrust
+  partner_match: domain+name-among-holders
+  partner_url: http://www.onetrust.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/onetrust/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - onetrust
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Optimizely
+  partner: optimizely
+  partner_match: domain+name-among-holders
+  partner_url: https://www.optimizely.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/optimizely/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - optimizely
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Oracle BlueKai
+  partner: oracle
+  partner_match: domain+name-among-holders
+  partner_url: https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCDA/index.html#Help/Introduction/Privacy/pii_policy.html
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/oracle-bluekai/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - oracle-bluekai
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Paytronix
+  partner: paytronix
+  partner_match: domain
+  partner_url: https://paytronix.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/paytronix/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - paytronix
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Pinterest
+  partner: pinterest
+  partner_match: domain
+  partner_url: https://business.pinterest.com/en
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/pinterest/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - pinterest
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Qualtrics
+  partner: qualtrics
+  partner_match: domain
+  partner_url: https://www.qualtrics.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/qualtrics/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - qualtrics
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Remerge
+  partner: remerge
+  partner_match: domain
+  partner_url: https://www.remerge.io
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/remerge/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - remerge
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: RevenueCat
+  partner: revenuecat
+  partner_match: domain
+  partner_url: https://www.revenuecat.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/revenuecat/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - revenuecat
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Rokt
+  partner: rokt
+  partner_match: domain
+  partner_url: https://rokt.com/?utm_campaign=202105mParticle&#x26;utm_source=mparticle
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/rokt/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rokt
+      integration_types:
+      - audience
+      - event
+      - partners
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: RTB House
+  partner: rtbhouse
+  partner_match: domain
+  partner_url: https://www.rtbhouse.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/rtb-house/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - rtb-house
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesforce Email
+  partner: salesforce
+  partner_match: domain+name-among-holders
+  partner_url: https://developer.salesforce.com/docs/atlas.en-us.mc-app-development.meta/mc-app-development/create-a-mc-app.htm
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/salesforce-email/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - salesforce-email
+      - salesforce-mobile-push
+      integration_types:
+      - audience
+      - event
+    source:
+      catalog_entries:
+      - salesforce-email
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Salesforce Sales and Service Cloud
+  partner: salesforce-sales-cloud
+  partner_match: domain+name-among-holders
+  partner_url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/bulk_api_2_0.htm
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/salesforce-sales-cloud/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - salesforce-sales-cloud
+      integration_types:
+      - event
+    source:
+      catalog_entries:
+      - salesforce-sales-cloud
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Samba TV
+  partner: sambatv
+  partner_match: domain
+  partner_url: https://samba.tv
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/samba-tv/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - samba-tv
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Scalarr
+  partner: scalarr
+  partner_match: domain
+  partner_url: https://scalarr.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/scalarr/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - scalarr
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: SendGrid
+  partner: sendgrid
+  partner_match: domain
+  partner_url: https://sendgrid.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/sendgrid/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sendgrid
+      integration_types:
+      - audience
+    source:
+      catalog_entries:
+      - sendgrid
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: ShareThis
+  partner: sharethis
+  partner_match: domain
+  partner_url: http://www.sharethis.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/sharethis/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sharethis
+      integration_types:
+      - audience
+    source:
+      catalog_entries:
+      - sharethis
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Shopify
+  partner: shopify
+  partner_match: domain
+  partner_url: https://www.shopify.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/shopify/custom-pixel/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - shopify
+      integration_types:
+      - custom-pixel
+    source:
+      catalog_entries:
+      - shopify
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Singular
+  partner: singular
+  partner_match: domain
+  partner_url: https://support.singular.net/hc/en-us/articles/360048588672
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/singular/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - singular
+      integration_types:
+      - event
+    source:
+      catalog_entries:
+      - singular
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Snapchat Conversions
+  partner: snapchat
+  partner_match: domain+name-among-holders
+  partner_url: https://developers.snap.com/api/marketing-api/Conversions-API/GetStarted
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/snapchat-conversions/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - snapchat-conversions
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Snowflake
+  partner: snowflake
+  partner_match: domain
+  partner_url: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/snowflake/data-warehouse/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - snowflake
+      integration_types:
+      - audience
+      - data-warehouse
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Spotify
+  partner: spotify
+  partner_match: domain+name-among-holders
+  partner_url: https://ads.spotify.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/spotify/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - spotify
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Split
+  partner: split
+  partner_match: domain
+  partner_url: https://www.split.io/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/split/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - split
+      integration_types:
+      - event
+    source:
+      catalog_entries:
+      - split
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Sprig
+  partner: sprig
+  partner_match: domain
+  partner_url: https://sprig.com/?&#x26;utm_source=mparticle_2021-10-03&#x26;utm_medium=integration&#x26;utm_campaign=mparticle
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/sprig/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - sprig
+      integration_types:
+      - audience
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Statsig
+  partner: statsig
+  partner_match: domain
+  partner_url: https://www.statsig.com
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/statsig/event/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - statsig
+      integration_types:
+      - event
+    source:
+      catalog_entries:
+      - statsig
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Talon.One
+  partner: talon-one
+  partner_match: domain
+  partner_url: https://www.talon.one/?utm_source=mparticle&#x26;utm_medium=docs&#x26;utm_campaign=partners
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/talon-one/audience/
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - talon-one
+      integration_types:
+      - audience
+      - event
+      - loyalty-feed
+    source:
+      catalog_entries:
+      - talon-one
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: TikTok Event
+  partner: tiktok
+  partner_match: domain+name-among-holders
+  partner_url: https://www.tiktok.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/tiktok/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - tiktok
+      integration_types:
+      - audience
+      - audience-deprecated
+      - event
+      - migration-guide
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Vkontakte
+  partner: vk
+  partner_match: domain
+  partner_url: https://vk.com/about
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/vkontakte/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - vkontakte
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Vungle
+  partner: vungle
+  partner_match: domain
+  partner_url: https://www.vungle.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/vungle/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - vungle
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Yotpo
+  partner: yotpo
+  partner_match: domain
+  partner_url: https://www.yotpo.com/
+  marketplace: coverage
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/yotpo/feed/
+  coverage_role:
+  - source
+  cdp_signals:
+    source:
+      catalog_entries:
+      - yotpo
+      integration_types:
+      - feed
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/mparticle
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - mparticle
+      status: released
+      sync_types:
+      - Events
+      - Users
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+source: https://docs.mparticle.com/integrations/
