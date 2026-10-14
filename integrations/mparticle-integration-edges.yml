@@ -4,6 +4,7 @@ checked:
 - https://aws.amazon.com/marketplace/
 - https://docs.mparticle.com/integrations/
 - https://hightouch.com/docs/destinations/mparticle
+- olo/integrations/olo-integration-edges.yml
 marketplace_apps:
 - marketplace: coverage
   channel: coverage-list
@@ -2229,4 +2230,21 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Olo (own)
+  partner: olo
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.olo.com/partners/mparticle
+  mirror_of: olo/integrations/olo-integration-edges.yml
+  apps:
+  - mParticle
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Data Analytics
 source: https://docs.mparticle.com/integrations/

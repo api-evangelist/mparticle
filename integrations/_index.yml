@@ -1227,3 +1227,16 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: mparticle-olo-own
+  label: Olo (own)
+  partner: olo
+  partner_name: Olo (own)
+  category: Data Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.olo.com/partners/mparticle
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
