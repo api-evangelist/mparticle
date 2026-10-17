@@ -90,6 +90,40 @@ paths:
           description: Service unavailable - the message should be retried after a back off
 components:
   schemas:
+    GeoLocation:
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+        accuracy:
+          type: number
+      required:
+      - latitude
+      - longitude
+      additionalProperties: false
+    EventType:
+      type: string
+      enum:
+      - session_start
+      - session_end
+      - screen_view
+      - custom_event
+      - crash_report
+      - opt_out
+      - first_run
+      - pre_attribution
+      - push_registration
+      - application_state_transition
+      - push_message
+      - network_performance
+      - breadcrumb
+      - profile
+      - push_reaction
+      - commerce_event
+      - user_attribute_change
+      - user_identity_change
+      - uninstall
     DeviceCurrentState:
       properties:
         time_since_start_ms:
@@ -145,40 +179,67 @@ components:
           - FaceDown
           - Square
       additionalProperties: false
-    ApiErrorResponse:
-      type: object
+    ConsentState:
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-    EventType:
-      type: string
-      enum:
-      - session_start
-      - session_end
-      - screen_view
-      - custom_event
-      - crash_report
-      - opt_out
-      - first_run
-      - pre_attribution
-      - push_registration
-      - application_state_transition
-      - push_message
-      - network_performance
-      - breadcrumb
-      - profile
-      - push_reaction
-      - commerce_event
-      - user_attribute_change
-      - user_identity_change
-      - uninstall
+        gdpr:
+          $ref: '#/components/schemas/GDPRConsentState'
+      required:
+      - gdpr
+      additionalProperties: false
+    CommonEventData:
+      properties:
+        timestamp_unixtime_ms:
+          type: integer
+        event_id:
+          type: integer
+          format: int64
+          readOnly: true
+        source_message_id:
+          type: string
+        session_id:
+          type: integer
+          format: int64
+        session_uuid:
+          type: string
+        session_start_unixtime_ms:
+          type: integer
+        event_start_unixtime_ms:
+          type: integer
+        custom_attributes:
+          type: object
+          additionalProperties:
+            type: string
+        location:
+          $ref: '#/components/schemas/GeoLocation'
+        device_current_state:
+          $ref: '#/components/schemas/DeviceCurrentState'
+        is_goal_defined:
+          type: boolean
+        lifetime_value_change:
+          type: boolean
+        lifetime_value_attribute_name:
+          type: string
+        data_connection_type:
+          type: string
+        event_num:
+          type: integer
+        view_controller:
+          type: string
+        is_main_thread:
+          type: boolean
+        canonical_name:
+          type: string
+        event_system_notification_info:
+          $ref: '#/components/schemas/EventSystemNotificationInfo'
+    EventSystemNotificationInfo:
+      readOnly: true
+      properties:
+        type:
+          type: string
+          enum:
+          - gdpr_change
+      required:
+      - type
     DeviceInformation:
       properties:
         brand:
@@ -287,6 +348,20 @@ components:
         fire_advertising_id:
           type: string
       additionalProperties: false
+    DataPlanContext:
+      properties:
+        plan_id:
+          type: string
+        plan_version:
+          type: integer
+      required:
+      - plan_id
+    BaseEvent:
+      properties:
+        data:
+          $ref: '#/components/schemas/CommonEventData'
+        event_type:
+          $ref: '#/components/schemas/EventType'
     SourceInformation:
       readOnly: true
       properties:
@@ -308,13 +383,53 @@ components:
         is_historical:
           type: boolean
       additionalProperties: false
-    ConsentState:
+    AttributionInfo:
       properties:
-        gdpr:
-          $ref: '#/components/schemas/GDPRConsentState'
+        service_provider:
+          type: string
+        publisher:
+          type: string
+        campaign:
+          type: string
       required:
-      - gdpr
+      - service_provider
+      - publisher
+      - campaign
       additionalProperties: false
+    GDPRConsentState:
+      properties:
+        regulation:
+          type: string
+        document:
+          type: string
+        consented:
+          type: boolean
+        timestamp_unixtime_ms:
+          type: integer
+        location:
+          type: string
+        hardware_id:
+          type: string
+      required:
+      - regulation
+      - document
+      - consented
+      - timestamp_unixtime_ms
+      - location
+      - hardware_id
+      additionalProperties: false
+    ApiErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
     ApplicationInformation:
       properties:
         application_name:
@@ -353,6 +468,10 @@ components:
             additionalProperties:
               type: string
       additionalProperties: false
+    BatchContext:
+      properties:
+        data_plan:
+          $ref: '#/components/schemas/DataPlanContext'
     Batch:
       properties:
         source_request_id:
@@ -471,126 +590,7 @@ components:
       additionalProperties: false
       required:
       - environment
-    CommonEventData:
-      properties:
-        timestamp_unixtime_ms:
-          type: integer
-        event_id:
-          type: integer
-          format: int64
-          readOnly: true
-        source_message_id:
-          type: string
-        session_id:
-          type: integer
-          format: int64
-        session_uuid:
-          type: string
-        session_start_unixtime_ms:
-          type: integer
-        event_start_unixtime_ms:
-          type: integer
-        custom_attributes:
-          type: object
-          additionalProperties:
-            type: string
-        location:
-          $ref: '#/components/schemas/GeoLocation'
-        device_current_state:
-          $ref: '#/components/schemas/DeviceCurrentState'
-        is_goal_defined:
-          type: boolean
-        lifetime_value_change:
-          type: boolean
-        lifetime_value_attribute_name:
-          type: string
-        data_connection_type:
-          type: string
-        event_num:
-          type: integer
-        view_controller:
-          type: string
-        is_main_thread:
-          type: boolean
-        canonical_name:
-          type: string
-        event_system_notification_info:
-          $ref: '#/components/schemas/EventSystemNotificationInfo'
-    GeoLocation:
-      properties:
-        latitude:
-          type: number
-        longitude:
-          type: number
-        accuracy:
-          type: number
-      required:
-      - latitude
-      - longitude
-      additionalProperties: false
-    BaseEvent:
-      properties:
-        data:
-          $ref: '#/components/schemas/CommonEventData'
-        event_type:
-          $ref: '#/components/schemas/EventType'
-    EventSystemNotificationInfo:
-      readOnly: true
-      properties:
-        type:
-          type: string
-          enum:
-          - gdpr_change
-      required:
-      - type
     BulkBatch:
       type: array
       items:
         $ref: '#/components/schemas/Batch'
-    GDPRConsentState:
-      properties:
-        regulation:
-          type: string
-        document:
-          type: string
-        consented:
-          type: boolean
-        timestamp_unixtime_ms:
-          type: integer
-        location:
-          type: string
-        hardware_id:
-          type: string
-      required:
-      - regulation
-      - document
-      - consented
-      - timestamp_unixtime_ms
-      - location
-      - hardware_id
-      additionalProperties: false
-    DataPlanContext:
-      properties:
-        plan_id:
-          type: string
-        plan_version:
-          type: integer
-      required:
-      - plan_id
-    BatchContext:
-      properties:
-        data_plan:
-          $ref: '#/components/schemas/DataPlanContext'
-    AttributionInfo:
-      properties:
-        service_provider:
-          type: string
-        publisher:
-          type: string
-        campaign:
-          type: string
-      required:
-      - service_provider
-      - publisher
-      - campaign
-      additionalProperties: false

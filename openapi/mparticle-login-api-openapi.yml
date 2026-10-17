@@ -37,29 +37,32 @@ paths:
       operationId: postLogin
       x-operation-id-source: derived
 components:
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentityErrorResponse'
-    TooManyRequests:
-      description: Too many requests. Reference Retry-After header and try again later.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying the request.
-          schema:
-            type: integer
-    IdentifySuccessResponse:
-      description: IdentifyResponse containing the newly created or updated MPID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IdentifySuccessResponse'
-    Unauthorized:
-      description: Unauthorized.
   schemas:
+    IdentifyRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/IdentityBaseRequest'
+      - type: object
+        properties:
+          previous_mpid:
+            type: string
+          known_identities:
+            $ref: '#/components/schemas/Identities'
+    IdentifySuccessResponse:
+      properties:
+        context:
+          description: Base 64 string to store for the subsequent request.
+          type: string
+        matched_identities:
+          $ref: '#/components/schemas/Identities'
+        mpid:
+          description: The mParticle ID associated with this Identity.
+          type: string
+        is_ephemeral:
+          description: If true, the ID and its storage can be deleted by the client upon change of ID.
+          readOnly: true
+          type: boolean
+      type: object
     Platform:
       enum:
       - ios
@@ -73,6 +76,39 @@ components:
       - xbox
       - other
       type: string
+    IdentityBaseRequest:
+      properties:
+        client_sdk:
+          $ref: '#/components/schemas/ClientSdk'
+        context:
+          description: Previous context string.
+          type: string
+        environment:
+          description: The environment to used to apply this change. (required)
+          enum:
+          - production
+          - development
+          type: string
+        request_id:
+          type: string
+        request_timestamp_ms:
+          type: integer
+      required:
+      - environment
+      type: object
+    IdentityErrorResponse:
+      description: Indicates one or more errors occured during the request.
+      properties:
+        errors:
+          items:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            type: object
+          type: array
+      type: object
     Identities:
       additionalProperties: false
       properties:
@@ -121,64 +157,6 @@ components:
         device_application_stamp:
           type: string
       type: object
-    IdentifyRequest:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/IdentityBaseRequest'
-      - type: object
-        properties:
-          previous_mpid:
-            type: string
-          known_identities:
-            $ref: '#/components/schemas/Identities'
-    IdentityBaseRequest:
-      properties:
-        client_sdk:
-          $ref: '#/components/schemas/ClientSdk'
-        context:
-          description: Previous context string.
-          type: string
-        environment:
-          description: The environment to used to apply this change. (required)
-          enum:
-          - production
-          - development
-          type: string
-        request_id:
-          type: string
-        request_timestamp_ms:
-          type: integer
-      required:
-      - environment
-      type: object
-    IdentifySuccessResponse:
-      properties:
-        context:
-          description: Base 64 string to store for the subsequent request.
-          type: string
-        matched_identities:
-          $ref: '#/components/schemas/Identities'
-        mpid:
-          description: The mParticle ID associated with this Identity.
-          type: string
-        is_ephemeral:
-          description: If true, the ID and its storage can be deleted by the client upon change of ID.
-          readOnly: true
-          type: boolean
-      type: object
-    IdentityErrorResponse:
-      description: Indicates one or more errors occured during the request.
-      properties:
-        errors:
-          items:
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-            type: object
-          type: array
-      type: object
     ClientSdk:
       description: Describes the client SDK originating the request.
       properties:
@@ -189,20 +167,29 @@ components:
         sdk_version:
           type: string
       type: object
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+    IdentifySuccessResponse:
+      description: IdentifyResponse containing the newly created or updated MPID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentifySuccessResponse'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdentityErrorResponse'
+    TooManyRequests:
+      description: Too many requests. Reference Retry-After header and try again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying the request.
+          schema:
+            type: integer
   parameters:
-    ReadOnly:
-      name: read_only
-      in: query
-      description: Perform this action as a read-only operation for debugging purposes.
-      required: false
-      schema:
-        type: boolean
-    AuthHeaderDigest:
-      name: x-mp-signature
-      in: header
-      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
-      schema:
-        type: string
     ReturnMatchedIds:
       name: return_matches
       in: query
@@ -216,10 +203,17 @@ components:
       name: Date
       schema:
         type: string
-    AuthHeaderKey:
-      name: x-mp-key
+    ReadOnly:
+      name: read_only
+      in: query
+      description: Perform this action as a read-only operation for debugging purposes.
+      required: false
+      schema:
+        type: boolean
+    AuthHeaderDigest:
+      name: x-mp-signature
       in: header
-      description: API key for your mParticle workspace. REQUIRED for digest auth.
+      description: 'HMAC-SHA256 digest of the concatenated and newline separated: HTTP method, date, path, and request body. REQUIRED for digest auth.'
       schema:
         type: string
     IdentifyBodyRequest:
@@ -229,6 +223,12 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/IdentifyRequest'
+    AuthHeaderKey:
+      name: x-mp-key
+      in: header
+      description: API key for your mParticle workspace. REQUIRED for digest auth.
+      schema:
+        type: string
   securitySchemes:
     BasicSecurity:
       type: http
