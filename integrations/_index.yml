@@ -1240,3 +1240,238 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: mparticle-go-module-proxy
+  label: Go module proxy
+  partner_name: Go module proxy
+  category: official SDK (Go)
+  type: register
+  channel: package-registry
+  evidence: https://pkg.go.dev/github.com/mParticle/mparticle-go-sdk
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/mParticle/mparticle-go-sdk
+      version: v1.1.7
+      released: '2026-08-06'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/github.com/mParticle/mparticle-go-sdk
+      repo_leg: github-org:mparticle
+      publisher_leg: org:mparticle
+      matched_by: github-org
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-maven-central
+  label: Maven Central
+  partner: maven-central
+  partner_name: Maven Central
+  category: official SDK (Java/JVM)
+  type: register
+  channel: package-registry
+  evidence: https://central.sonatype.com/artifact/com.mparticle/android-core
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.mparticle:android-core
+      version: 6.1.9
+      released: '2026-10-15'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.mparticle/android-core
+      repo_leg: github-org:mparticle
+      publisher_leg: groupId:mparticle.com
+      matched_by: domain
+    - name: com.mparticle:server-events-sdk
+      version: 2.9.0
+      released: '2026-09-17'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.mparticle/server-events-sdk
+      repo_leg: github-org:mparticle
+      publisher_leg: groupId:mparticle.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@mparticle/aquarium
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@mparticle/aquarium'
+      version: 2.5.1
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/aquarium
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/cli'
+      version: 1.0.8
+      released: '2026-01-29'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/cli
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/data-planning-models'
+      version: 0.1.8
+      released: '2026-08-05'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/data-planning-models
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/data-planning-node'
+      version: 1.0.6
+      released: '2026-01-29'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/data-planning-node
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/event-models'
+      version: 1.3.1
+      released: '2026-08-05'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/event-models
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/web-media-sdk'
+      version: 1.5.0
+      released: '2026-01-29'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/web-media-sdk
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: '@mparticle/web-sdk'
+      version: 2.81.0
+      released: '2026-10-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@mparticle/web-sdk
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: cordova-plugin-mparticle
+      version: 3.0.0
+      released: '2026-01-29'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/cordova-plugin-mparticle
+      repo_leg: domain:mparticle.com
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    - name: react-native-mparticle
+      version: 3.4.0
+      released: '2026-09-28'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/react-native-mparticle
+      repo_leg: domain:mparticle.com
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/mparticle/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: mparticle
+      version: 0.16.1
+      released: '2023-06-20'
+      released_field: upload_time
+      lapsed: true
+      page: https://pypi.org/project/mparticle/
+      repo_leg: github-org:mparticle
+      publisher_leg: email:mparticle.com
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-rubygems
+  label: RubyGems
+  partner: rubygems
+  partner_name: RubyGems
+  category: official SDK (Ruby)
+  type: register
+  channel: package-registry
+  evidence: https://rubygems.org/gems/mparticle
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: RubyGems (public registry JSON)
+    spec_file: null
+    language: Ruby
+    packages:
+    - name: mparticle
+      version: 1.1.1
+      released: '2021-08-02'
+      released_field: version_created_at
+      lapsed: true
+      page: https://rubygems.org/gems/mparticle
+      repo_leg: domain:mparticle.com
+      publisher_leg: org:mparticle
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
