@@ -1475,3 +1475,29 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: mparticle-databricks-marketplace
+  label: Databricks Marketplace
+  partner: databricks
+  partner_name: Databricks Marketplace
+  category: data product listing
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  evidence: https://marketplace.databricks.com/provider/5e5a5b14-3bbf-4926-be16-0454fc62ee29
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: mParticle
+    matched_domain: mparticle.com
+    matched_by: domain
+    listings: 1
+    sample_listings:
+    - mParticle by Rokt Databricks Connector
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null

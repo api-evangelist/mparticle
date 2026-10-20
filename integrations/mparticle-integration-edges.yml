@@ -5,24 +5,25 @@ source:
 checked:
 - https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
-- https://cdn.winget.microsoft.com/cache
-- https://composio.dev/toolkits/mparticle
 - https://crates.io/api/v1
 - https://docs.mparticle.com/integrations/
-- https://formulae.brew.sh/api/cask.json
-- https://formulae.brew.sh/api/formula.json
-- https://github.com/ScoopInstaller/Extras
-- https://github.com/ScoopInstaller/Main
 - https://hightouch.com/docs/destinations/mparticle
-- https://monid.ai/tools/mparticle
-- https://n8n.io/integrations/mparticle/
 - https://proxy.golang.org
 - https://pypi.org/pypi
 - https://registry.npmjs.org
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
-- https://zapier.com/apps/mparticle/integrations
 - olo/integrations/olo-integration-edges.yml
+- https://composio.dev/toolkits/mparticle
+- https://monid.ai/tools/mparticle
+- https://n8n.io/integrations/mparticle/
+- https://zapier.com/apps/mparticle/integrations
+- https://cdn.winget.microsoft.com/cache
+- https://formulae.brew.sh/api/cask.json
+- https://formulae.brew.sh/api/formula.json
+- https://github.com/ScoopInstaller/Extras
+- https://github.com/ScoopInstaller/Main
+- https://marketplace.databricks.com/
 summary: null
 marketplace_apps:
 - marketplace: coverage
@@ -2532,4 +2533,29 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-official-clis.py
   first_seen: '2026-10-20'
+- partner_name: Databricks Marketplace
+  partner: databricks
+  partner_match: aggregator
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/5e5a5b14-3bbf-4926-be16-0454fc62ee29
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: mParticle
+    matched_domain: mparticle.com
+    matched_by: domain
+    listings: 1
+    sample_listings:
+    - mParticle by Rokt Databricks Connector
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
 templates: []
