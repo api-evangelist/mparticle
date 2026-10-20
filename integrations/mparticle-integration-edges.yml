@@ -1,5 +1,7 @@
-generated: '2026-10-13'
+generated: '2026-10-20'
 method: searched
+source:
+- https://docs.mparticle.com/integrations/
 checked:
 - https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
@@ -12,6 +14,11 @@ checked:
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
 - olo/integrations/olo-integration-edges.yml
+- https://composio.dev/toolkits/mparticle
+- https://monid.ai/tools/mparticle
+- https://n8n.io/integrations/mparticle/
+- https://zapier.com/apps/mparticle/integrations
+summary: null
 marketplace_apps:
 - marketplace: coverage
   channel: coverage-list
@@ -2490,4 +2497,4 @@ edges:
       - feed
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-source: https://docs.mparticle.com/integrations/
+templates: []
