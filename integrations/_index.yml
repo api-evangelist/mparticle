@@ -15,19 +15,6 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
-- slug: mparticle-olo-own
-  label: Olo (own)
-  partner: olo
-  partner_name: Olo (own)
-  category: Data Analytics
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://www.olo.com/partners/mparticle
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: mparticle-go-module-proxy
   label: Go module proxy
   partner_name: Go module proxy
@@ -1499,5 +1486,101 @@
     signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
     detected_by: sweep-data-marketplaces.py
     detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-cocoapods-trunk
+  label: CocoaPods trunk
+  partner_name: CocoaPods trunk
+  category: iOS SDK (CocoaPods)
+  type: register
+  channel: package-registry
+  evidence: https://cocoapods.org/pods/mParticle
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: CocoaPods trunk (cdn.cocoapods.org Specs; github.com/CocoaPods/Specs)
+    spec_file: null
+    role: cocoapods-publisher
+    registered_name: mParticle
+    matched_domain: mparticle.com
+    matched_by: domain
+    pods:
+    - pod: mParticle
+      version: 4.5.5
+      homepage: http://www.mparticle.com
+      deprecated: true
+    - pod: mParticle-Adjust
+      version: 8.3.0
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Adjust-5
+      version: 9.7.4
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Adobe
+      version: 8.2.8
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Adobe-5
+      version: 9.7.4
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Appboy
+      version: 8.15.0
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Apple-Inspector
+      version: 0.0.1
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Apple-Media-SDK
+      version: 2.0.2
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Apple-SDK
+      version: 9.7.4
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Apple-SDK-ObjC
+      version: 9.7.4
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-Apple-SDK-Swift
+      version: 9.7.4
+      homepage: https://www.mparticle.com
+      deprecated: false
+    - pod: mParticle-AppsFlyer
+      version: 8.4.7
+      homepage: https://www.mparticle.com
+      deprecated: false
+    signal_note: latest podspec homepage (domain) + authors (name); pods, versions and counts are context
+    detected_by: sweep-mobile-sdk-index.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-olo-own
+  label: Olo (own)
+  partner: olo
+  partner_name: Olo (own)
+  category: Data Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.olo.com/partners/mparticle
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: mparticle-google-play-developer-google-play-sdk-index
+  label: Google Play Developer (Google Play SDK Index)
+  partner: google-play
+  partner_name: Google Play Developer (Google Play SDK Index)
+  category: mobile SDK (analytics, data-management, marketing-and-engagement)
+  type: marketplace
+  marketplace: Google Play SDK Index
+  channel: partner-built
+  evidence: https://play.google.com/sdks/details/com-mparticle-android-core
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
