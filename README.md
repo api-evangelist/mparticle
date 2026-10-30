@@ -1,4 +1,4 @@
-# mParticle (mparticle)
+# mParticle
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,162 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-mParticle is a customer data platform (CDP) that helps brands collect, unify, and activate customer data across mobile, web, OTT, and server sources, then forward it in real time to hundreds of analytics, marketing, and warehouse destinations. The mParticle developer platform exposes server Events, IDSync, Profile, Warehouse Sync, Calculated Attributes, and Platform APIs that let teams ingest events, resolve identity, manage configurations, and orchestrate audiences using HTTP Basic and bearer token authentication.
+mParticle is a customer data platform (CDP) that helps brands collect, unify, and activate customer data across mobile, web, OTT, and server sources, then forward it in real time to hundreds of analytics, marketing, and warehouse destinations. The mParticle developer platform exposes server Events, IDSync, Profile, Warehouse Sync, Calculated Attributes, Data Planning and Platform APIs that let teams ingest events, resolve identity, manage configurations, and orchestrate audiences using HTTP Basic, an HMAC request digest, and OAuth 2.0 client-credentials bearer tokens. mParticle was acquired by Rokt.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/mparticle/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/mparticle/refs/heads/main/apis.yml)
+**Areas:** Customer Data Platform · CDP · Analytics · Identity Resolution · Audiences · Data Pipeline · Marketing Data · Event Streaming · Data Governance
 
-## Scope
+## mParticle on APIs.io
 
-- **Type:** Index
+Everything profiled for mParticle is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mparticle/](https://apis.io/providers/mparticle/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Customer Data Platform
-- CDP
-- Analytics
-- Identity Resolution
-- Audience
-- Data Pipeline
-- Marketing Data
+- [mParticle Profile API](https://apis.io/apis/mparticle/profile-api/) — REST API for retrieving unified user profiles, identities, attributes, and audience memberships at scale to personalize downstream applications.
+- [mParticle Platform API](https://apis.io/apis/mparticle/platform-api/) — Management REST API used to programmatically configure mParticle inputs, outputs, filters, audiences, data plans, and workspace settings as part of a fully…
+- [mParticle Warehouse Sync API](https://apis.io/apis/mparticle/warehouse-sync-api/) — REST API for building reverse-ETL pipelines that pull data out of a customer data warehouse (connections, data models, field transformations and pipelines)…
+- [mParticle Data Plan API](https://apis.io/apis/mparticle/mparticle-data-plan-api/) — Endpoints for managing Data Plans
+- [mParticle Data Plan Version API](https://apis.io/apis/mparticle/mparticle-data-plan-version-api/) — Endpoints for versioning Data Plans
+- [mParticle Events API](https://apis.io/apis/mparticle/mparticle-events-api/) — Send your data to the mParticle platform.
+- [mParticle Identify API](https://apis.io/apis/mparticle/mparticle-identify-api/) — The Identify API from mParticle — 1 operation(s) for identify.
+- [mParticle Login API](https://apis.io/apis/mparticle/mparticle-login-api/) — The Login API from mParticle — 1 operation(s) for login.
+- [mParticle Logout API](https://apis.io/apis/mparticle/mparticle-logout-api/) — The Logout API from mParticle — 1 operation(s) for logout.
+- [mParticle Modify API](https://apis.io/apis/mparticle/mparticle-modify-api/) — The Modify API from mParticle — 1 operation(s) for modify.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### mParticle Events API
+Event-driven and webhook contracts.
 
-Server-to-server REST API for sending event batches, bulk uploads, and historical data into mParticle from backend systems. Authenticates with HTTP Basic auth using a server-side API key and secret pair.
+- [Mparticle Webhooks](https://apis.io/asyncapis/mparticle/mparticle-webhooks/)
 
-- **Human URL:** [https://docs.mparticle.com/developers/apis/http/](https://docs.mparticle.com/developers/apis/http/)
-- **Base URL:** `https://s2s.mparticle.com/v2`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- REST
-- Server-to-Server
-- Events
-- Bulk
-- HTTP Basic
+- [mparticle](https://apis.io/servers/mparticle/mparticle/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://docs.mparticle.com/developers/apis/http/)
-- [J S O N  Reference](https://docs.mparticle.com/developers/apis/json-reference/)
-- [Postman Collection](collections/mparticle.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mparticle.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### mParticle IDSync API
+- [Mparticle Agentic Access](https://apis.io/agentic-access/mparticle/mparticle-agentic-access/)
 
-Identity resolution REST API used to match, link, and modify user identities across devices and channels in mParticle, returning a stable mParticle ID (MPID) for downstream use.
+#### JSON Schema (3)
 
-- **Human URL:** [https://docs.mparticle.com/developers/apis/idsync/](https://docs.mparticle.com/developers/apis/idsync/)
-- **Base URL:** `https://identity.mparticle.com/v1`
+The data models the API reads and writes.
 
-#### Tags
+- [Mparticle Eventsapi](https://apis.io/schemas/mparticle/mparticle-eventsapi/)
+- [Mparticle Eventsapi Bulk](https://apis.io/schemas/mparticle/mparticle-eventsapi-bulk/)
+- [Mparticle Eventsapi Sample](https://apis.io/schemas/mparticle/mparticle-eventsapi-sample/)
 
-- REST
-- Identity
-- IDSync
-- MPID
+#### Collections (3)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.mparticle.com/developers/apis/idsync/)
-- [Postman Collection](collections/mparticle.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mparticle.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [mParticle Events API](https://apis.io/collections/mparticle/open-mparticle/)
+- [mParticle Events Bulkevents API](https://apis.io/collections/mparticle/open-mparticle-bulkevents-api/)
+- [mParticle Bulkevents Events API](https://apis.io/collections/mparticle/open-mparticle-events-api/)
 
-### mParticle Profile API
+#### Overlays (3)
 
-REST API for retrieving unified user profiles, identities, attributes, and audience memberships at scale to personalize downstream applications.
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- **Human URL:** [https://docs.mparticle.com/developers/apis/profile-api/](https://docs.mparticle.com/developers/apis/profile-api/)
-- **Base URL:** `https://api.mparticle.com/userprofile/v1`
+- [Mparticle Dataplanning Overlay](https://apis.io/overlays/mparticle/mparticle-dataplanning-overlay/)
+- [Mparticle Events Overlay](https://apis.io/overlays/mparticle/mparticle-events-overlay/)
+- [Mparticle Identity Overlay](https://apis.io/overlays/mparticle/mparticle-identity-overlay/)
 
-#### Tags
+#### Security (4)
 
-- REST
-- Profiles
-- Attributes
-- Audiences
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Mparticle Authentication](https://apis.io/security/mparticle/mparticle-authentication/)
+- [Mparticle Domain Security](https://apis.io/security/mparticle/mparticle-domain-security/)
+- [Mparticle Trust Center](https://apis.io/security/mparticle/mparticle-trust-center/)
+- [Mparticle Vulnerability Disclosure](https://apis.io/security/mparticle/mparticle-vulnerability-disclosure/)
 
-- [Documentation](https://docs.mparticle.com/developers/apis/profile-api/)
-- [Postman Collection](collections/mparticle.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mparticle.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### mParticle Platform API
+Published plans, tiers and prices.
 
-Management REST API used to programmatically configure mParticle inputs, outputs, filters, audiences, data plans, and workspace settings as part of a fully versioned CDP-as-code workflow.
+- [Mparticle Plans Pricing](https://apis.io/plans/mparticle/mparticle-plans-pricing/)
 
-- **Human URL:** [https://docs.mparticle.com/developers/apis/platform/overview/](https://docs.mparticle.com/developers/apis/platform/overview/)
-- **Base URL:** `https://api.mparticle.com/platform/v2`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- REST
-- Management
-- Inputs
-- Outputs
-- Data Plans
-- Bearer Token
+- [Mparticle Rate Limits](https://apis.io/rate-limits/mparticle/mparticle-rate-limits/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.mparticle.com/developers/apis/platform/overview/)
-- [Postman Collection](collections/mparticle.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/mparticle.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Common Properties
-
-- [GitHub Organization](https://github.com/mparticle)
-- [LinkedIn](https://www.linkedin.com/company/mparticle-inc-)
 - [Website](https://www.mparticle.com/)
 - [Documentation](https://docs.mparticle.com/)
-- [Developer  Portal](https://www.mparticle.com/developers/)
+- [Getting started](https://docs.mparticle.com/guides/getting-started/)
+- [API reference](https://docs.mparticle.com/developers/apis/http/)
 - [Pricing](https://www.mparticle.com/pricing/)
-- [Sign Up](https://www.mparticle.com/get-demo/)
-- [L L Ms Txt](https://docs.mparticle.com/llms.txt)
+- [Sign up](https://www.mparticle.com/get-a-demo/)
+- [Blog](https://www.mparticle.com/blog/)
+- [Security](https://www.rokt.com/vulnerability-disclosure/)
+- [Compliance](https://trust.mparticle.com/)
+- [Terms of service](https://www.mparticle.com/legal/platform-terms-of-service/)
+- [Privacy policy](https://www.mparticle.com/privacypolicy/)
+- [GitHub](https://github.com/mparticle)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 56.9** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 60.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 68.4 |
+| Developer ergonomics | 42.3 |
+| Access clarity | 60.5 |
+
+**Agent readiness 45.7** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mparticle/](https://apis.io/providers/mparticle/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for mParticle: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mparticle/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
